@@ -4,28 +4,28 @@ INSERT INTO accountwm(user_id,user_pw,user_name,user_nick,e_mail) VALUES ('minte
 INSERT INTO accountwm(user_id,user_pw,user_name,user_nick,e_mail) VALUES ('hyuntemp','temp8890!','이현호','어몽어스','hyuntemp@kosea.com');
 
 
-INSERT INTO category VALUES (1,'chintemp','검색엔진');
-INSERT INTO category VALUES (2,'mintemp','검색엔진');
-INSERT INTO category VALUES (3,'hyuntemp','검색엔진');
-INSERT INTO category VALUES (4,'chintemp','블로그');
-INSERT INTO category VALUES (5,'chintemp','야옹이');
-INSERT INTO category VALUES (6,'mintemp','문제사이트');
-INSERT INTO category VALUES (7,'hyuntemp','IT자료');
+INSERT INTO category VALUES (category_seq.NEXTVAL,'chintemp','검색엔진');
+INSERT INTO category VALUES (category_seq.NEXTVAL,'mintemp','검색엔진');
+INSERT INTO category VALUES (category_seq.NEXTVAL,'hyuntemp','검색엔진');
+INSERT INTO category VALUES (category_seq.NEXTVAL,'chintemp','블로그');
+INSERT INTO category VALUES (category_seq.NEXTVAL,'chintemp','야옹이');
+INSERT INTO category VALUES (category_seq.NEXTVAL,'mintemp','문제사이트');
+INSERT INTO category VALUES (category_seq.NEXTVAL,'hyuntemp','IT자료');
 
 
-INSERT INTO urlwm VALUES (1,1,'https://www.naver.com/','네이버','1','#네이버');
-INSERT INTO urlwm VALUES (2,2,'https://www.naver.com/','네이버','1','#네이버');
-INSERT INTO urlwm VALUES (3,3,'https://www.naver.com/','네이버','1','#네이버');
-INSERT INTO urlwm VALUES (4,1,'https://www.google.co.kr/','구글','1','#구글');
-INSERT INTO urlwm VALUES (5,2,'https://www.google.co.kr/','구글','1','#구글');
-INSERT INTO urlwm VALUES (6,3,'https://www.daum.net/','다음인가카카오인가','1','#다음#카카오');
-INSERT INTO urlwm VALUES (7,4,'https://gmlwjd9405.github.io/2018/05/08/algorithm-merge-sort.html','정렬블로그','0','#정렬');
-INSERT INTO urlwm VALUES (8,4,'http://blog.naver.com/prologue/PrologueList.nhn?blogId=kks227','자료구조알고리즘','1','#자료구조#알고리즘');
-INSERT INTO urlwm VALUES (9,5,'http://www.nangmancat.com/','낭만고양이','1','#고양이#분양소');
-INSERT INTO urlwm VALUES (10,6,'http://www.jungol.co.kr/','정올','1','#문제사이트1');
-INSERT INTO urlwm VALUES (11,6,'https://www.acmicpc.net/','백준','0','#문제사이트2');
-INSERT INTO urlwm VALUES (12,7,'https://stackoverflow.com/','스택오버플로','0','#블로그로가자');
-INSERT INTO urlwm VALUES (13,7,'http://bootstrapk.com/','부트스트랩','1','#웹서식');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,1,'https://www.naver.com/','네이버','1','#네이버');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,2,'https://www.naver.com/','네이버','1','#네이버');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,3,'https://www.naver.com/','네이버','1','#네이버');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,1,'https://www.google.co.kr/','구글','1','#구글');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,2,'https://www.google.co.kr/','구글','1','#구글');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,3,'https://www.daum.net/','다음인가카카오인가','1','#다음#카카오');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,4,'https://gmlwjd9405.github.io/2018/05/08/algorithm-merge-sort.html','정렬블로그','0','#정렬');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,4,'http://blog.naver.com/prologue/PrologueList.nhn?blogId=kks227','자료구조알고리즘','1','#자료구조#알고리즘');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,5,'http://www.nangmancat.com/','낭만고양이','1','#고양이#분양소');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,6,'http://www.jungol.co.kr/','정올','1','#문제사이트1');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,6,'https://www.acmicpc.net/','백준','0','#문제사이트2');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,7,'https://stackoverflow.com/','스택오버플로','0','#블로그로가자');
+INSERT INTO urlwm VALUES (urlwm_seq.NEXTVAL,7,'http://bootstrapk.com/','부트스트랩','1','#웹서식');
 
 COMMIT;
 

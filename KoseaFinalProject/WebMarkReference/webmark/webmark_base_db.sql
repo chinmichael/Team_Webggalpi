@@ -15,7 +15,7 @@ CREATE TABLE accountwm (
 	user_pw		VARCHAR2(100)	NOT NULL,
 	user_name	VARCHAR2(100)	NOT NULL,
 	user_nick		VARCHAR2(100)	NOT NULL,
-	e_mail		VARCHAR2(200)	NOT NULL,
+	e_mail		VARCHAR2(200)	UNIQUE,
 	create_date	DATE		DEFAULT SYSDATE,
 	CONSTRAINT PK_accountwm		PRIMARY KEY(user_id)
 );
@@ -30,6 +30,8 @@ CREATE TABLE category (
 	CONSTRAINT FK_category		FOREIGN KEY(user_id)	REFERENCES accountwm
 );
 
+CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
+
 CREATE TABLE urlwm (
 	url_num		NUMBER		NOT NULL,
 	cat_num		NUMBER		NOT NULL,
@@ -41,5 +43,6 @@ CREATE TABLE urlwm (
 	CONSTRAINT FK_urlwm		FOREIGN KEY(cat_num)	REFERENCES category
 );
 
+CREATE SEQUENCE urlwm_seq START WITH 1 INCREMENT BY 1;
 
 COMMIT;
