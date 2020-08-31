@@ -1,6 +1,7 @@
 package com.webmark.controller;
 
 import com.webmark.controller.action.Action;
+import com.webmark.controller.action.SampleLogin;
 
 public class ActionFactory {
 	
@@ -20,7 +21,9 @@ public class ActionFactory {
 		
 		switch(command) {
 		
-		
+		case "sample_account":
+			action = new SampleLogin();
+			break;
 		
 		}
 		

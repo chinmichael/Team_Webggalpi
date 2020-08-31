@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>	
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +38,7 @@ right: 0;
 width: 100%;
 height: 50px;
 
-padding: 10px 0px;
+padding: 12px 0px;
 
 color: #848484;
 background-color: #EDF1F4;
@@ -46,7 +49,7 @@ background-color: #EDF1F4;
 <body>
 	<!-- navigation -->
 	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="#"><i class="far fa-bookmark"></i>&nbsp;&nbsp;WebMarker</a>
+		<a class="navbar-brand" href="#"><i class="far fa-bookmark"></i>&nbsp;&nbsp;Webggalpi</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarTogglerDemo02"
 			aria-controls="navbarTogglerDemo02" aria-expanded="false"
@@ -56,8 +59,8 @@ background-color: #EDF1F4;
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active"><a class="nav-link" href="#">List
-						<span class="sr-only">(current)</span>
+				<li class="nav-item"><a class="nav-link" href="#">List
+						 <span class="sr-only">(current)</span> 
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Board</a></li>
 
@@ -69,7 +72,7 @@ background-color: #EDF1F4;
 					class="nav-link dropdown-toggle" href="#"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> <i
-						class="fas fa-user-tag"></i>&nbsp; User nick &nbsp;
+						class="fas fa-user-tag"></i>&nbsp; ${account.usernick} &nbsp;
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" href="#">Account</a> <a
@@ -91,11 +94,11 @@ background-color: #EDF1F4;
 	<div class="container-fluid">
 		<div class="row min-vh-100 flex-column flex-md-row">
 
-			<aside class="col-12 col-md-2 p-0 bg-light flex-shrink-1">
+			<aside class="col-12 col-md-2 p-0 bg-light flex-shrink-1" style = "overflow: auto;">
 				<!-- <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start py-2">
                 <div class="collapse navbar-collapse "> -->
-				<nav class="navbar navbar-expand-lg navbar-light bg-light flex-md-column flex-row align-items-start py-2">
-					<a class="navbar-brand" href="#">Category</a>
+				<nav class="navbar navbar-expand-lg navbar-light bg-light flex-md-column flex-md-row align-items-start py-2">
+					<a class="navbar-brand" href="#"><i class="fas fa-swatchbook"></i> &nbsp;Category</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarNavAltMarkup"
 						aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -103,34 +106,19 @@ background-color: #EDF1F4;
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					
 						<div class="navbar-nav">
-							<a class="nav-link active" href="#">Home <span
-								class="sr-only">(current)</span></a> <a class="nav-link" href="#">Features</a>
-							<a class="nav-link" href="#">Pricing</a> <a
-								class="nav-link disabled" href="#" tabindex="-1"
-								aria-disabled="true">Disabled</a>
+							<ul class="flex-md-column navbar-nav w-100 justify-content-between">
+							<c:forEach var = "category" items = "${categoryList }">
+								<li class="nav-item"><a class="nav-link" href="http://localhost:8181/KoseaFinalProject/WebmarkServlet?command=url_list?cat_no=${category.cat_no }">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-folder"></i>&nbsp; ${category.cat_name}</a></li>
+							</c:forEach>
+                       
+                    </ul>
 						</div>
 					</div>
 				</nav>
 			</aside>
+			
+			<!-- /navigation -->
 
-
-			<!-- content -->
-
-			<!-- /content -->
-	</div>
-	<!-- footer & bootstrap js -->
-	<footer>
-		<h4 align = "center" style = "font-size: 15pt;">© Team Webmark</h4>
-	</footer>
-	</div>
-	
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="http://localhost:8181/KoseaFinalProject/resource/js/bootstrap.js"></script>
-
-
-
-</body>
-</html>
