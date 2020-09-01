@@ -16,7 +16,7 @@
 			<li class="list-group-item" style = "line-height: 40px;"><a href = "${urlL.url_address }" target = "_blank">${urlL.url_name }</a>
 				<button type="button" class="btn btn-light float-right" style = "box-shadow:none;"><i class="fas fa-trash"></i></button>
 				<button type="button" class="btn btn-light float-right" style = "box-shadow:none;"><i class="fas fa-edit"></i></button>
-				<button type="button" class="btn btn-light float-right" style = "box-shadow:none;"><i class="fas fa-map-marker-alt"></i></button>
+				<button type="button" class="btn btn-light float-right" style = "box-shadow:none;" onclick = "parent.location.href='${urlL.url_address }'"><i class="fas fa-map-marker-alt"></i></button>
 			</li>
 			</c:forEach>
 		</ul>
