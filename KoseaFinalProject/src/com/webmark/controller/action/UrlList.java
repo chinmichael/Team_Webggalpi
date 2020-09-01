@@ -7,28 +7,22 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.webmark.dao.MainDAO;
-import com.webmark.dto.AccountVO;
-import com.webmark.dto.CategoryVO;
+import com.webmark.dto.UrlVO;
 
-public class SampleLogin implements Action {
+public class UrlList implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String userid = "chintemp";
+		long cat_no = Long.parseLong(request.getParameter("cat_no"));
 		
 		MainDAO dao = MainDAO.getInstance();
-		AccountVO vo = dao.sampleAccount(userid);
-		List<CategoryVO> list = dao.getCategoryList(userid);
+		List<UrlVO> list = dao.getUrlList(cat_no);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("account", vo);
-		session.setAttribute("categoryList", list);
-		
+		request.setAttribute("urlList", list);
 		String url = "/main/markList.jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

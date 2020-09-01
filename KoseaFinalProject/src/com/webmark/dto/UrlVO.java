@@ -5,7 +5,7 @@ public class UrlVO {
 	private long url_num;
 	private String url_address;
 	private String url_name;
-	private char url_access;
+	private String url_access;
 	private String tag;
 	
 	
@@ -27,10 +27,10 @@ public class UrlVO {
 	public void setUrl_name(String url_name) {
 		this.url_name = url_name;
 	}
-	public char getUrl_access() {
+	public String getUrl_access() {
 		return url_access;
 	}
-	public void setUrl_access(char url_access) {
+	public void setUrl_access(String url_access) {
 		this.url_access = url_access;
 	}
 	public String getTag() {

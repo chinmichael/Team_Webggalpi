@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <body>
@@ -9,19 +11,15 @@
 	<!-- content -->
 	<main class="col bg-faded py-3 flex-grow-1">
 
-		<div class="btn-group">
-			<button type="button" class="btn btn-secondary dropdown-toggle"
-				data-toggle="dropdown" data-display="static" aria-haspopup="true"
-				aria-expanded="false">Left-aligned but right aligned when
-				large screen</button>
-			<div class="dropdown-menu dropdown-menu-lg-right">
-				<button class="dropdown-item" type="button">Action</button>
-				<button class="dropdown-item" type="button">Another action</button>
-				<button class="dropdown-item" type="button">Something else
-					here</button>
-			</div>
-		</div>
-
+		<ul class="list-group list-group-flush">
+			<c:forEach var = "urlL" items = "${urlList }">
+			<li class="list-group-item" style = "line-height: 40px;"><a href = "${urlL.url_address }" target = "_blank">${urlL.url_name }</a>
+				<button type="button" class="btn btn-light float-right" style = "box-shadow:none;"><i class="fas fa-trash"></i></button>
+				<button type="button" class="btn btn-light float-right" style = "box-shadow:none;"><i class="fas fa-edit"></i></button>
+				<button type="button" class="btn btn-light float-right" style = "box-shadow:none;"><i class="fas fa-map-marker-alt"></i></button>
+			</li>
+			</c:forEach>
+		</ul>
 
 	</main>
 

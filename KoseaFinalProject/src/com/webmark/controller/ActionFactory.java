@@ -2,6 +2,7 @@ package com.webmark.controller;
 
 import com.webmark.controller.action.Action;
 import com.webmark.controller.action.SampleLogin;
+import com.webmark.controller.action.UrlList;
 
 public class ActionFactory {
 	
@@ -25,6 +26,11 @@ public class ActionFactory {
 			action = new SampleLogin();
 			break;
 		
+		case "url_list":
+			action = new UrlList();
+			break;	
+			
+			
 		}
 		
 		return action;

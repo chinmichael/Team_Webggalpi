@@ -110,7 +110,7 @@ background-color: #EDF1F4;
 						<div class="navbar-nav">
 							<ul class="flex-md-column navbar-nav w-100 justify-content-between">
 							<c:forEach var = "category" items = "${categoryList }">
-								<li class="nav-item"><a class="nav-link" href="http://localhost:8181/KoseaFinalProject/WebmarkServlet?command=url_list?cat_no=${category.cat_no }">
+								<li class="nav-item"><a class="nav-link" href="http://localhost:8181/KoseaFinalProject/WebmarkServlet?command=url_list&cat_no=${category.cat_no }">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-folder"></i>&nbsp; ${category.cat_name}</a></li>
 							</c:forEach>
                        
