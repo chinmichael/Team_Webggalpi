@@ -1,6 +1,10 @@
 package com.webmark.dto;
 
-public class CategoryVO {
+import java.io.Serializable;
+
+public class CategoryVO implements Serializable {
+	
+	private static final long serialVersionUID = -3156305778921382511L;
 	
 	private long cat_no;
 	private String cat_name;

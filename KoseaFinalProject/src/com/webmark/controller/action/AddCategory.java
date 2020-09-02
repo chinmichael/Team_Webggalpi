@@ -11,33 +11,39 @@ import javax.servlet.http.HttpSession;
 
 import com.webmark.dao.MainDAO;
 import com.webmark.dto.AccountVO;
+import com.webmark.dto.CategoryVO;
 import com.webmark.dto.UrlVO;
 
-public class UrlList implements Action {
+public class AddCategory implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
-		long cat_no = Long.parseLong(request.getParameter("cat_no"));
-		
 		HttpSession session = request.getSession();
-		AccountVO vo = (AccountVO) session.getAttribute("account");
+		
+		AccountVO vo = (AccountVO)session.getAttribute("account");
 		String userid = vo.getUserid();
+		String cat_name = request.getParameter("addCategoryName");
 		
 		MainDAO dao = MainDAO.getInstance();
+		long result = dao.addCategory(userid, cat_name);
 		
-		String check_id = dao.checkID(cat_no);
+		String url = "";
 		
-		String url = "/main/markList.jsp";
-		
-		if(check_id.equals(userid)) {
-			List<UrlVO> list = dao.getUrlList(cat_no);
+		if(result != -1) {
+			session.removeAttribute("categoryList");
+			List<CategoryVO> list_C = dao.getCategoryList(userid);
+			session.setAttribute("categoryList", list_C);
 			
-			request.setAttribute("urlList", list);
-			request.setAttribute("cat_no", request.getParameter("cat_no"));
-
+			List<UrlVO> list_U = dao.getUrlList(result);
+			
+			request.setAttribute("urlList", list_U);
+			request.setAttribute("cat_no", Long.toString(result));
+			
+			url = "/main/markList.jsp";
+		} else {
+			
 		} 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

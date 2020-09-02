@@ -27,7 +27,7 @@ CREATE TABLE category (
 	/*depth		NUBMER		DEFAULT 0, */
 	/*upper_name	VARCHAR2(100),	*/
 	CONSTRAINT PK_category		PRIMARY KEY(cat_num),
-	CONSTRAINT FK_category		FOREIGN KEY(user_id)	REFERENCES accountwm
+	CONSTRAINT FK_category		FOREIGN KEY(user_id)	REFERENCES accountwm	ON DELETE CASCADE
 );
 
 CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
@@ -40,7 +40,7 @@ CREATE TABLE urlwm (
 	url_access	CHAR(1)		DEFAULT '0'	CHECK(url_access IN ('0', '1')),
 	tag		VARCHAR2(100),
 	CONSTRAINT PK_urlwm		PRIMARY KEY(url_num),
-	CONSTRAINT FK_urlwm		FOREIGN KEY(cat_num)	REFERENCES category
+	CONSTRAINT FK_urlwm		FOREIGN KEY(cat_num)	REFERENCES category	ON DELETE CASCADE
 );
 
 CREATE SEQUENCE urlwm_seq START WITH 1 INCREMENT BY 1;

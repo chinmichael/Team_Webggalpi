@@ -59,10 +59,10 @@ background-color: #EDF1F4;
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item"><a class="nav-link" href="#">List
+				<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/main/markList.jsp">List
 						 <span class="sr-only">(current)</span> 
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Board</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Community</a></li>
 
 				
 			</ul>
@@ -77,7 +77,7 @@ background-color: #EDF1F4;
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" href="#">Account</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Logout</a>
+							<a class="dropdown-item" href="/KoseaFinalProject/WebmarkServlet?command=logout">Logout</a>
 					</div></li>
 			</ul>
 			
@@ -93,11 +93,14 @@ background-color: #EDF1F4;
 	<div class="container-fluid">
 		<div class="row min-vh-100 flex-column flex-md-row">
 
-			<aside class="col-12 col-md-2 p-0 bg-light flex-shrink-1" style = "overflow: auto;">
+			<aside class="col-12 col-md-2 p-0 bg-light flex-shrink-1"
+				style="overflow: auto;">
 				<!-- <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start py-2">
                 <div class="collapse navbar-collapse "> -->
-				<nav class="navbar navbar-expand-lg navbar-light bg-light flex-md-column flex-md-row align-items-start py-2">
-					<a class="navbar-brand" href="#"><i class="fas fa-swatchbook"></i> &nbsp;Category</a>
+				<nav
+					class="navbar navbar-expand-lg navbar-light bg-light flex-md-column flex-md-row align-items-start py-2">
+					<a class="navbar-brand" href="/KoseaFinalProject/main/markList.jsp"><i class="fas fa-swatchbook"></i>
+						&nbsp;Category</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarNavAltMarkup"
 						aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -105,16 +108,20 @@ background-color: #EDF1F4;
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					
+
 						<div class="navbar-nav">
-							<ul class="flex-md-column navbar-nav w-100 justify-content-between">
-							<c:forEach var = "category" items = "${categoryList }">
-								<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/WebmarkServlet?command=url_list&cat_no=${category.cat_no }">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-folder"></i>&nbsp; ${category.cat_name}</a>
-								</li>
-							</c:forEach>
-							
-							<!-- add category menu -->
+							<ul
+								class="flex-md-column navbar-nav w-100 justify-content-between">
+								
+								<!-- Notice -->
+								
+								<li class="nav-item"><a class="nav-link"
+										href=#>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-bullhorn"></i>&nbsp;
+											Noitce
+									</a></li>
+
+								<!-- add category menu -->
 
 								<li class="nav-item"><a class="nav-link" href=#
 									data-toggle="modal" data-target="#addCategoryModal">
@@ -126,73 +133,96 @@ background-color: #EDF1F4;
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" id="addCategoryModalLabel">Adding Category</h5>
+													<h5 class="modal-title" id="addCategoryModalLabel">Adding
+														Category</h5>
 													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close" style = "outline:none;">
+														aria-label="Close" style="outline: none;">
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<form>
-												<div class="modal-body" style = "height:130px;">
-														<label for="addCategoryName" class="col-form-label">Category Name:</label>
-														<input type="text" class="form-control" id="addCategoryName">
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" style = "box-shadow:none;" data-dismiss="modal">Close</button>
-													<input type="submit" class="btn btn-success" style = "box-shadow:none;" value = "Add">
-												</div>
+												<form name="AddCatFrm" method="post"
+													action="/KoseaFinalProject/WebmarkServlet?command=add_category">
+
+													<div class="modal-body" style="height: 130px;">
+														<label for="addCategoryName" class="col-form-label">Category
+															Name:</label> <input type="text" class="form-control"
+															id="addCategoryName" name="addCategoryName">
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															style="box-shadow: none;" data-dismiss="modal">Close</button>
+														<input type="submit" class="btn btn-success"
+															style="box-shadow: none;" value="Add">
+													</div>
 												</form>
 											</div>
 										</div>
 									</div></li>
-									
-									<!-- delete category menu -->
-									
-									<li class="nav-item"><a class="nav-link" href=#
+
+								<!-- delete category menu -->
+
+								<li class="nav-item"><a class="nav-link" href=#
 									data-toggle="modal" data-target="#delCategoryModal">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-minus-circle"></i>&nbsp; Delete Category
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+										class="fas fa-minus-circle"></i>&nbsp; Delete Category
 								</a>
 									<div class="modal fade" id="delCategoryModal" tabindex="-1"
 										aria-labelledby="delCategoryModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" id="delCategoryModalLabel">Delete Category</h5>
+													<h5 class="modal-title" id="delCategoryModalLabel">Delete
+														Category</h5>
 													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close" style = "outline:none;">
+														aria-label="Close" style="outline: none;">
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<form>
-												<div class="modal-body" style = "height:70px;">
-												
+												<form name="DelCatFrm" method="post"
+													action="/KoseaFinalProject/WebmarkServlet?command=delete_category">
+													<div class="modal-body" style="height: 70px;">
+
 														<div class="input-group mb-3">
 															<div class="input-group-prepend">
 																<label class="input-group-text" for="delCategoryGroup">Name</label>
 															</div>
-															<select class="custom-select" id="delCategoryGroup">
-																<option selected>Choose...</option>
-																<c:forEach var = "categoryDel" items = "${categoryList }">
+															<select class="custom-select" id="delCategoryGroup"
+																name="delCategoryGroup">
+																<option value = "-1" selected>Choose...</option>
+																<c:forEach var="categoryDel" items="${categoryList }">
 																	<option value="${categoryDel.cat_no }">${categoryDel.cat_name }</option>
 																</c:forEach>
 															</select>
-															
+
 														</div>
 													</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" style = "box-shadow:none;" data-dismiss="modal">Close</button>
-													<input type="submit" class="btn btn-danger" style = "box-shadow:none;" value = "Delete">
-												</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															style="box-shadow: none;" data-dismiss="modal">Close</button>
+														<input type="submit" class="btn btn-danger"
+															style="box-shadow: none;" value="Delete">
+													</div>
 												</form>
 											</div>
 										</div>
 									</div></li>
+									
+									
+								<!-- category list -->	
+
+								<c:forEach var="category" items="${categoryList }">
+									<li class="nav-item"><a class="nav-link"
+										href="/KoseaFinalProject/WebmarkServlet?command=url_list&cat_no=${category.cat_no }">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-folder"></i>&nbsp;
+											${category.cat_name}
+									</a></li>
+								</c:forEach>
 
 							</ul>
 						</div>
 					</div>
 				</nav>
 			</aside>
-			
+
 			<!-- /navigation -->
 

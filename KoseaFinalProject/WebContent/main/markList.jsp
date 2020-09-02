@@ -11,7 +11,65 @@
 	<!-- content -->
 	<main class="col bg-faded py-3 flex-grow-1">
 	
+	<!-- main home -->
+	
+	<c:choose>
+	<c:when test = "${empty cat_no}">
+
+				<div class="jumbotron jumbotron-fluid">
+					<div class="container">
+						<h1 class="display-4">Welcome to Webggalpi!!</h1>
+						<br>
+						<p class="lead">
+							If you don't have any category, please start <a data-toggle="modal"
+								data-target="#addCategoryModal2" href=#>'Add New Category'!</a>
+								
+								<div class="modal fade" id="addCategoryModal2" tabindex="-1"
+										aria-labelledby="addCategoryModal2Label" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="addCategoryModalLabel">Adding Category</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close" style = "outline:none;">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form name = "AddCatFrm" method = "post" action = "/KoseaFinalProject/WebmarkServlet?command=add_category">
+												
+												<div class="modal-body" style = "height:130px;">
+														<label for="addCategoryName" class="col-form-label">Category Name:</label>
+														<input type="text" class="form-control" id="addCategoryName" name = "addCategoryName">
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" style = "box-shadow:none;" data-dismiss="modal">Close</button>
+													<input type="submit" class="btn btn-success" style = "box-shadow:none;" value = "Add">
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								
+						</p>
+						
+					</div>
+				</div>
+
+			</c:when>
+	
+	<c:otherwise>
 		<!-- url list -->
+		
+		<c:if test = "${empty urlList }">
+			<div class="jumbotron jumbotron-fluid">
+					<div class="container">
+						<h1 class="display-4">This category is empty.</h1>
+						<br>
+						<p class="lead">Please click <a href = # data-toggle="modal"
+								data-target="#addURLModal">'+' button</a> to create new URL list!!</p>
+					</div>
+				</div>
+		</c:if>
 		
 		<ul class="list-group list-group-flush">
 			<c:forEach var = "urlL" items = "${urlList }">
@@ -21,13 +79,13 @@
 				<!-- Button trigger modal -->
 				
 					<button type="button" class="btn btn-light float-right" data-toggle="modal" style = "box-shadow:none;"
-						data-target="#trashUrlModal"><i class="fas fa-trash"></i></button> <!-- Modal -->
-					<div class="modal fade" id="trashUrlModal" tabindex="-1"
-						aria-labelledby="trashUrlModalLabel" aria-hidden="true">
+						data-target="#trashUrlModal${urlL.url_num}"><i class="fas fa-trash"></i></button> <!-- Modal -->
+					<div class="modal fade" id="trashUrlModal${urlL.url_num}" tabindex="-1"
+						aria-labelledby="trashUrlModal${urlL.url_num}Label" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="trashUrlModalLabel">Caution</h5>
+									<h5 class="modal-title" id="trashUrlModal${urlL.url_num}Label">Caution</h5>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close" style = "outline: none;">
 										<span aria-hidden="true">&times;</span>
@@ -37,7 +95,11 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal" style = "box-shadow:none;">Close</button>
-									<button type="button" class="btn btn-danger" style = "box-shadow:none;">Delete</button>
+									<form name = "delUrlFrm" method = "post" action = "/KoseaFinalProject/WebmarkServlet?command=delete_url">
+										<input type = "hidden" name = "cat_no" value = "${cat_no}">
+										<input type = "hidden" name = "url_num" value = "${urlL.url_num}">
+										<input type="submit" class="btn btn-danger" style = "box-shadow:none;" value = "Delete">
+									</form>
 								</div>
 							</div>
 						</div>
@@ -59,34 +121,63 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<form>
-									<div class="modal-body" style="height: 440px;">
+								<form name = "EditUrlFrm" method = "post" action = "/KoseaFinalProject/WebmarkServlet?command=edit_url">
+								<input type = "hidden" name = "url_num" value = "${urlL.url_num}">
+									<div class="modal-body" style="height: 460px;">
+										<div class="form-group">
 										<label for="urlLink" class="col-form-label" >URL Link :</label>
-										<input type="text" class="form-control" id="urlLink" onfocus="this.select()" value = "${urlL.url_address }">
-										<br> <label for="urlName" class="col-form-label">URL Name :</label>
-										<input type="text" class="form-control" id="urlName" value = "${urlL.url_name }">
-										<br> <label for="urlTag" class="col-form-label">Tag (Divide by '#') :</label>
-										<input type="text" class="form-control"id="urlTag" value = "${urlL.tag }">
-										<br>
+										<input type="text" class="form-control" id="urlLink" name="urlLink" onfocus="this.select()" value = "${urlL.url_address }">
+										</div>
+										<div class="form-group">
+										<label for="urlName" class="col-form-label">URL Name :</label>
+										<input type="text" class="form-control" id="urlName" name="urlName" value = "${urlL.url_name }">
+										</div>
+										<div class="form-group">
+										<label for="urlTag" class="col-form-label">Tag (Divide by '#', Maximum '5') :</label>
+										<input type="text" class="form-control"id="urlTag" name="urlTag" value = "${urlL.tag }">
+										</div>
+										
+										<div class="form-group" style = "padding-top : 15px;">	
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<label class="input-group-text" for="categorySelect">Category</label>
+													</div>
+													<select class="custom-select" id="categorySelect"
+														name="categorySelect">
+														<c:forEach var="categorySel" items="${categoryList }">
+															<c:choose>
+															<c:when test = "${categorySel.cat_no == cat_no }">
+																<option value="${categorySel.cat_no }" selected>${categorySel.cat_name }</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${categorySel.cat_no }">${categorySel.cat_name }</option>
+															</c:otherwise>
+															</c:choose>
+														</c:forEach>
+													</select>
 
+												</div>
+										</div>
+												
+										<div class="form-group" style = "padding-top : 15px;">
 										<div class="input-group mb-3">
 											<div class="input-group-prepend">
 												<label class="input-group-text" for="AccessUrl">Permit
-													accessing at Board</label>
+													accessing at community</label>
 											</div>
-											<select class="custom-select" id="AccessUrl">
+											<select class="custom-select" id="accessUrl" name="accessUrl">
 												<option value="1" selected>Agree</option>
 												<option value="0">Deny</option>
 											</select>
 
 										</div>
-
+										</div>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											style="box-shadow: none;" data-dismiss="modal">Close</button>
 										<input type="submit" class="btn btn-success"
-											style="box-shadow: none;" value="Add">
+											style="box-shadow: none;" value="Edit">
 									</div>
 								</form>
 							</div>
@@ -116,29 +207,33 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<form>
-								<div class="modal-body" style="height: 420px;">
+							<form name = "addUrlFrm" method = "post" action = "/KoseaFinalProject/WebmarkServlet?command=add_url">
+							<input type = "hidden" name = "cat_no" value = "${cat_no }">
+								<div class="modal-body" style="height: 390px;">
+									<div class="form-group">
 									<label for="urlLink" class="col-form-label">URL Link :</label>
-									<input type="text" class="form-control" id="urlLink">
-									<br>
+									<input type="text" class="form-control" id="urlLink" name="urlLink">
+									</div>
+									<div class="form-group">
 									<label for="urlName" class="col-form-label">URL Name :</label>
-									<input type="text" class="form-control" id="urlName">
-									<br>
-									<label for="urlTag" class="col-form-label">Tag (Divide by '#') :</label>
-									<input type="text" class="form-control" id="urlTag">
-									<br><br>
+									<input type="text" class="form-control" id="urlName" name="urlName">
+									</div>
+									<div class="form-group">
+									<label for="urlTag" class="col-form-label">Tag (Divide by '#', Maximum '5') :</label>
+									<input type="text" class="form-control" id="urlTag" name="urlTag">
+									</div>
 									
+									<div class="form-group" style = "padding-top : 15px;">
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<label class="input-group-text" for="AccessUrl">Permit accessing at Board</label>
+											<label class="input-group-text" for="AccessUrl">Permit accessing at community</label>
 										</div>
-										<select class="custom-select" id="AccessUrl">
+										<select class="custom-select" id="AccessUrl" name="AccessUrl">
 											<option value = "1" selected>Agree</option>
 											<option value = "0">Deny</option>
 										</select>
-
 									</div>
-
+									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
@@ -150,10 +245,10 @@
 						</div>
 					</div>
 				</div>
-
 			</li>
-			
 		</ul>
+		</c:otherwise>
+		</c:choose>
 
 	</main>
 

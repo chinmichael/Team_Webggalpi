@@ -11,37 +11,34 @@ import javax.servlet.http.HttpSession;
 
 import com.webmark.dao.MainDAO;
 import com.webmark.dto.AccountVO;
-import com.webmark.dto.UrlVO;
+import com.webmark.dto.CategoryVO;
 
-public class UrlList implements Action {
+public class DeleteCategory implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
-		long cat_no = Long.parseLong(request.getParameter("cat_no"));
-		
-		HttpSession session = request.getSession();
-		AccountVO vo = (AccountVO) session.getAttribute("account");
-		String userid = vo.getUserid();
+		long cat_no = Long.parseLong(request.getParameter("delCategoryGroup"));
 		
 		MainDAO dao = MainDAO.getInstance();
+		dao.deleteCategory(cat_no);
 		
-		String check_id = dao.checkID(cat_no);
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("categoryList");
+		
+		AccountVO vo = (AccountVO)session.getAttribute("account");
+		String userid = vo.getUserid();
+		
+		List<CategoryVO> list = dao.getCategoryList(userid);
+		session.setAttribute("categoryList", list);
 		
 		String url = "/main/markList.jsp";
-		
-		if(check_id.equals(userid)) {
-			List<UrlVO> list = dao.getUrlList(cat_no);
-			
-			request.setAttribute("urlList", list);
-			request.setAttribute("cat_no", request.getParameter("cat_no"));
 
-		} 
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
+		
 	}
 
 }

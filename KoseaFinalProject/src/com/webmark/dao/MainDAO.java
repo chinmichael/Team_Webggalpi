@@ -64,6 +64,36 @@ public class MainDAO {
 		return vo;
 	}
 	
+	public String checkID (long cat_no) {
+		
+		String sql = "select user_id from category where cat_num = ?";
+		
+		String check_id = "";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, cat_no);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check_id = rs.getString("user_id");
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return check_id;
+		
+	}
+	
 	public List<CategoryVO> getCategoryList (String userid) {
 		
 		String sql = "select * from category where user_id = ?";
@@ -134,6 +164,193 @@ public class MainDAO {
 		return list;
 	}
 	
+	public int addUrl (long cat_no, UrlVO vo) {
+		
+		String sql1 = "select url_num from urlwm where cat_num = ? and url_name = ?";
+		String sql2 = "insert into urlwm values (urlwm_seq.nextval,?,?,?,?,?)";
+		
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql1, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstmt.setLong(1, cat_no);
+			pstmt.setString(2, vo.getUrl_name());
+			rs = pstmt.executeQuery();
+			rs.last();
+			
+			if(rs.getRow() == 0) {
+				
+				pstmt.close();
+				
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setLong(1,cat_no);
+				pstmt.setString(2, vo.getUrl_address());
+				pstmt.setString(3, vo.getUrl_name());
+				pstmt.setString(4, vo.getUrl_access());
+				pstmt.setString(5, vo.getTag());
+				
+				pstmt.execute();
+				
+				result = 1;
+				
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return result;
+	}
+	
+	public void deletUrl (long url_num) {
+		
+		String sql = "delete from urlwm where url_num = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, url_num);
+			
+			pstmt.execute();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+	}
+	
+	public int editUrl (long cat_no, UrlVO vo) {
+		
+		String sql1 = "select url_num from urlwm where cat_num = ? and url_name = ?";
+		String sql2 = "update urlwm set cat_num = ?, url_address = ?, url_name = ?, url_access = ?, tag = ? where url_num = ?";
+		
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql1, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstmt.setLong(1, cat_no);
+			pstmt.setString(2, vo.getUrl_name());
+			rs = pstmt.executeQuery();
+			rs.last();
+			
+			if(rs.getRow() == 0) {
+				rs.close();
+				pstmt.close();
+				
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setLong(1, cat_no);
+				pstmt.setString(2, vo.getUrl_address());
+				pstmt.setString(3, vo.getUrl_name());
+				pstmt.setString(4, vo.getUrl_access());
+				pstmt.setString(5, vo.getTag());
+				pstmt.setLong(6, vo.getUrl_num());
+				
+				pstmt.execute();
+				
+				result = 1;
+				
+			} else {
+				result = -1;
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return result;
+	}
+	
+	public long addCategory (String userid, String cat_name) {
+		
+		String sql1 = "select cat_num from category where user_id = ? and cat_name = ?";
+		String sql2 = "insert into category values (category_seq.nextval,?,?)";
+		
+		long result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql1, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstmt.setString(1, userid);
+			pstmt.setString(2, cat_name);
+			rs = pstmt.executeQuery();
+			rs.last();
+			
+			if(rs.getRow() == 0) {
+				rs.close();
+				pstmt.close();
+				
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setString(1, userid);
+				pstmt.setString(2, cat_name);
+				pstmt.execute();
+				
+				pstmt.close();
+				pstmt = conn.prepareStatement(sql1);
+				pstmt.setString(1, userid);
+				pstmt.setString(2, cat_name);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					result = rs.getLong("cat_num");
+				}
+				
+			} else {
+				result = -1;
+			}
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		
+		return result;
+	}
+	
+	public void deleteCategory (long cat_no) {
+		
+		String sql = "delete from category where cat_num = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, cat_no);
+			pstmt.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+	}
 	
 
 }
