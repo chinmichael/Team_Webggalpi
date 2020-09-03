@@ -29,7 +29,7 @@ public class AddCategory implements Action {
 		MainDAO dao = MainDAO.getInstance();
 		long result = dao.addCategory(userid, cat_name);
 		
-		String url = "";
+		String url = "/main/markList.jsp";
 		
 		if(result != -1) {
 			session.removeAttribute("categoryList");
@@ -41,8 +41,8 @@ public class AddCategory implements Action {
 			request.setAttribute("urlList", list_U);
 			request.setAttribute("cat_no", Long.toString(result));
 			
-			url = "/main/markList.jsp";
 		} else {
+			request.setAttribute("message", "This category name is already in your list.");
 			
 		} 
 		

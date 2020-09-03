@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import com.webmark.dto.AccountVO;
 import com.webmark.dto.CategoryVO;
+import com.webmark.dto.SearchUrlVO;
 import com.webmark.dto.UrlVO;
 
 import util.DBManager;
@@ -202,6 +203,7 @@ public class MainDAO {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+			result = 0;
 		} finally {
 			DBManager.close(conn, pstmt, rs);
 		}
@@ -272,11 +274,56 @@ public class MainDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			result = 0;
 		} finally {
 			DBManager.close(conn, pstmt, rs);
 		}
 		
 		return result;
+	}
+	
+	public List<SearchUrlVO> searchUrl(String userid, String urlname) {
+		
+		String searchName = "%" + urlname + "%";
+		System.out.println(searchName);
+		String sql = "select u.cat_num, cat_name, url_num, url_address, url_name, url_access, tag from urlwm u, category c where u.cat_num = c.cat_num and c.user_id = ? and u.url_name like ?";
+		
+		List<SearchUrlVO> list = new Vector<SearchUrlVO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.setString(2, searchName);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				SearchUrlVO vo = new SearchUrlVO();
+				
+				String temp_catname = "(" + rs.getString("cat_name") + ")";
+				
+				vo.setUrl_num(rs.getLong("url_num"));
+				vo.setCat_no(rs.getLong("cat_num"));
+				vo.setCat_name(temp_catname);
+				vo.setUrl_address(rs.getString("url_address"));
+				vo.setUrl_name(rs.getString("url_name"));
+				vo.setUrl_access(rs.getString("url_access"));
+				vo.setTag(rs.getString("tag"));
+				
+				list.add(vo);
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return list;
 	}
 	
 	public long addCategory (String userid, String cat_name) {
@@ -323,6 +370,7 @@ public class MainDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			result = 0;
 		} finally {
 			DBManager.close(conn, pstmt, rs);
 		}

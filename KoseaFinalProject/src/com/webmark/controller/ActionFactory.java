@@ -8,6 +8,7 @@ import com.webmark.controller.action.DeleteUrl;
 import com.webmark.controller.action.EditUrl;
 import com.webmark.controller.action.Logout;
 import com.webmark.controller.action.SampleLogin;
+import com.webmark.controller.action.SearchUrl;
 import com.webmark.controller.action.UrlList;
 
 public class ActionFactory {
@@ -52,6 +53,10 @@ public class ActionFactory {
 			action = new EditUrl();
 			break;
 			
+		case "search_url":
+			action = new SearchUrl();
+			break;
+			
 		case "add_category":
 			action = new AddCategory();
 			break;
@@ -61,7 +66,7 @@ public class ActionFactory {
 			break;
 			
 		}
-		
+
 		return action;
 	}
 	

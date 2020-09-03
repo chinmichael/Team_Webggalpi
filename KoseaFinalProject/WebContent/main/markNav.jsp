@@ -82,8 +82,8 @@ background-color: #EDF1F4;
 			</ul>
 			
 
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" style = "height: calc(1.5em + 0.75rem - 5px); box-shadow:none;">
+			<form class="form-inline my-2 my-lg-0" method = "post" action = "/KoseaFinalProject/WebmarkServlet?command=search_url">
+				<input class="form-control mr-sm-2" type="text" name = "urlSearch" placeholder="Search" style = "height: calc(1.5em + 0.75rem - 5px); box-shadow:none;">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit" style = "height: calc(1.5em + 0.75rem - 5px); line-height: 0; box-shadow:none;"><i class="fas fa-search-location"></i></button>
 			</form>
 		</div>
@@ -123,89 +123,21 @@ background-color: #EDF1F4;
 
 								<!-- add category menu -->
 
-								<li class="nav-item"><a class="nav-link" href=#
-									data-toggle="modal" data-target="#addCategoryModal">
+								<li class="nav-item"><a class="nav-link" href=# id = "addCatModal">
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
 										class="fas fa-plus-circle"></i>&nbsp; Add New Category
 								</a>
-									<div class="modal fade" id="addCategoryModal" tabindex="-1"
-										aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="addCategoryModalLabel">Adding
-														Category</h5>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close" style="outline: none;">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<form name="AddCatFrm" method="post"
-													action="/KoseaFinalProject/WebmarkServlet?command=add_category">
-
-													<div class="modal-body" style="height: 130px;">
-														<label for="addCategoryName" class="col-form-label">Category
-															Name:</label> <input type="text" class="form-control"
-															id="addCategoryName" name="addCategoryName">
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary"
-															style="box-shadow: none;" data-dismiss="modal">Close</button>
-														<input type="submit" class="btn btn-success"
-															style="box-shadow: none;" value="Add">
-													</div>
-												</form>
-											</div>
-										</div>
-									</div></li>
+								<jsp:include page="/main/addCatModal.jsp" />
+								</li>
 
 								<!-- delete category menu -->
 
-								<li class="nav-item"><a class="nav-link" href=#
-									data-toggle="modal" data-target="#delCategoryModal">
+								<li class="nav-item"><a class="nav-link" href=# id = "delCatModal">
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
 										class="fas fa-minus-circle"></i>&nbsp; Delete Category
 								</a>
-									<div class="modal fade" id="delCategoryModal" tabindex="-1"
-										aria-labelledby="delCategoryModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="delCategoryModalLabel">Delete
-														Category</h5>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close" style="outline: none;">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<form name="DelCatFrm" method="post"
-													action="/KoseaFinalProject/WebmarkServlet?command=delete_category">
-													<div class="modal-body" style="height: 70px;">
-
-														<div class="input-group mb-3">
-															<div class="input-group-prepend">
-																<label class="input-group-text" for="delCategoryGroup">Name</label>
-															</div>
-															<select class="custom-select" id="delCategoryGroup"
-																name="delCategoryGroup">
-																<option value = "-1" selected>Choose...</option>
-																<c:forEach var="categoryDel" items="${categoryList }">
-																	<option value="${categoryDel.cat_no }">${categoryDel.cat_name }</option>
-																</c:forEach>
-															</select>
-
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary"
-															style="box-shadow: none;" data-dismiss="modal">Close</button>
-														<input type="submit" class="btn btn-danger"
-															style="box-shadow: none;" value="Delete">
-													</div>
-												</form>
-											</div>
-										</div>
-									</div></li>
+								<jsp:include page="/main/deleteCatModal.jsp" />
+								</li>
 									
 									
 								<!-- category list -->	
