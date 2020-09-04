@@ -27,7 +27,7 @@ public class MainDAO {
 	
 	public AccountVO sampleAccount (String userid) {
 		
-		String sql = "select user_id, user_pw, user_name, user_nick, e_mail, to_char(create_date, 'yyyy/mm/dd') \"create_date\" from accountwm where user_id = ?";
+		String sql = "select user_id, user_pw, user_name, user_nick, e_mail, user_type, to_char(create_date, 'yyyy/mm/dd') \"create_date\" from accountwm where user_id = ?";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -48,6 +48,7 @@ public class MainDAO {
 				vo.setUsername(rs.getString("user_name"));
 				vo.setUsernick(rs.getString("user_nick"));
 				vo.setEmail(rs.getString("e_mail"));
+				vo.setUsertype(rs.getString("user_type"));
 				vo.setCreatedate(rs.getString("create_date"));
 
 			}
@@ -285,7 +286,6 @@ public class MainDAO {
 	public List<SearchUrlVO> searchUrl(String userid, String urlname) {
 		
 		String searchName = "%" + urlname + "%";
-		System.out.println(searchName);
 		String sql = "select u.cat_num, cat_name, url_num, url_address, url_name, url_access, tag from urlwm u, category c where u.cat_num = c.cat_num and c.user_id = ? and u.url_name like ?";
 		
 		List<SearchUrlVO> list = new Vector<SearchUrlVO>();

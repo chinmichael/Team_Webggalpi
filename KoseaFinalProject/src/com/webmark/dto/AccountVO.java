@@ -7,6 +7,7 @@ public class AccountVO {
 	private String username;
 	private String usernick;
 	private String email;
+	private String usertype;
 	private String createdate;
 	
 	public String getUserid() {
@@ -38,6 +39,12 @@ public class AccountVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
 	}
 	public String getCreatedate() {
 		return createdate;

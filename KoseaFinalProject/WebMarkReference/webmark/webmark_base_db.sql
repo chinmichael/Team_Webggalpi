@@ -16,6 +16,8 @@ CREATE TABLE accountwm (
 	user_name	VARCHAR2(100)	NOT NULL,
 	user_nick		VARCHAR2(100)	NOT NULL,
 	e_mail		VARCHAR2(200)	UNIQUE,
+	user_type		CHAR(1)		DEFAULT '0'	CHECK(user_type IN ('0', '1')),
+	/*user_avatar	BLOB,*/
 	create_date	DATE		DEFAULT SYSDATE,
 	CONSTRAINT PK_accountwm		PRIMARY KEY(user_id)
 );
@@ -35,14 +37,51 @@ CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE urlwm (
 	url_num		NUMBER		NOT NULL,
 	cat_num		NUMBER		NOT NULL,
-	url_address	VARCHAR2(4000)	NOT NULL,
+	url_address	CLOB		NOT NULL,
 	url_name		VARCHAR2(100)	NOT NULL,  /*디폴트로 할 지 고민*/
 	url_access	CHAR(1)		DEFAULT '0'	CHECK(url_access IN ('0', '1')),
-	tag		VARCHAR2(100),
+	tag		VARCHAR2(1000),
 	CONSTRAINT PK_urlwm		PRIMARY KEY(url_num),
 	CONSTRAINT FK_urlwm		FOREIGN KEY(cat_num)	REFERENCES category	ON DELETE CASCADE
 );
 
 CREATE SEQUENCE urlwm_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE notice (
+	notice_num	NUMBER		NOT NULL,
+	notice_title	VARCHAR2(1000)	NOT NULL,
+	notice_contents	CLOB		NOT NULL,
+	write_date	DATE		DEFAULT SYSDATE,
+	/*notice_attach	BLOB,*/
+	CONSTRAINT PK_noitce		PRIMARY KEY(notice_num)
+);
+
+CREATE SEQUENCE notice_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE board (
+	board_num	NUMBER		NOT NULL,
+	user_id		VARCHAR2(100)	NOT NULL,
+	board_title	VARCHAR2(1000)	NOT NULL,
+	board_contents	CLOB		NOT NULL,
+	write_date	DATE		DEFAULT SYSDATE,
+	/*board_attach	BLOB,*/
+	CONSTRAINT PK_board		PRIMARY KEY(board_num),
+	CONSTRAINT FK_board		FOREIGN KEY(user_id)	REFERENCES accountwm	ON DELETE CASCADE 
+);
+
+CREATE SEQUENCE board_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE commentwm (
+	comment_num	NUMBER		NOT NULL,
+	board_num	NUMBER		NOT NULL,
+	user_id		VARCHAR2(100)	NOT NULL,
+	comment_contents	CLOB		NOT NULL,
+	write_date	DATE		DEFAULT SYSDATE,
+	CONSTRAINT PK_commentwm	PRIMARY KEY(comment_num),
+	CONSTRAINT FK_commentwm1	FOREIGN KEY(board_num)	REFERENCES board		ON DELETE CASCADE,
+	CONSTRAINT FK_commentwm2	FOREIGN KEY(user_id)	REFERENCES accountwm	ON DELETE CASCADE
+);
+
+CREATE SEQUENCE commentwm_seq START WITH 1 INCREMENT BY 1;
 
 COMMIT;
