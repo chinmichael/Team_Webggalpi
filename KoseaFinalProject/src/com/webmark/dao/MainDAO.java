@@ -400,5 +400,7 @@ public class MainDAO {
 		
 	}
 	
+	public List<NoticeVO> PagingList(NoticePagingVO pagingVO)
+	
 
 }

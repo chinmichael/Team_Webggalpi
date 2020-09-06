@@ -49,11 +49,13 @@ CREATE SEQUENCE urlwm_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE notice (
 	notice_num	NUMBER		NOT NULL,
+	user_id		VARCHAR2(100),
 	notice_title	VARCHAR2(1000)	NOT NULL,
 	notice_contents	CLOB		NOT NULL,
 	write_date	DATE		DEFAULT SYSDATE,
 	/*notice_attach	BLOB,*/
-	CONSTRAINT PK_noitce		PRIMARY KEY(notice_num)
+	CONSTRAINT PK_noitce		PRIMARY KEY(notice_num),
+	CONSTRAINT FK_notice		FOREIGN KEY(user_id)	REFERENCES accountwm	ON DELETE SET NULL
 );
 
 CREATE SEQUENCE notice_seq START WITH 1 INCREMENT BY 1;
