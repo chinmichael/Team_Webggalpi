@@ -3,11 +3,14 @@ package com.webmark.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
 import com.webmark.dto.AccountVO;
 import com.webmark.dto.CategoryVO;
+import com.webmark.dto.NoticePagingVO;
+import com.webmark.dto.NoticeVO;
 import com.webmark.dto.SearchUrlVO;
 import com.webmark.dto.UrlVO;
 
@@ -400,7 +403,71 @@ public class MainDAO {
 		
 	}
 	
-	public List<NoticeVO> PagingList(NoticePagingVO pagingVO)
+	public List<NoticeVO> getNoticePagingList(NoticePagingVO pagingVO) {
+		
+		List<NoticeVO> pagingList = new Vector<NoticeVO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select a.* from (select a.* ROWNUM rnum, FLOOR((ROWNUM - 1)/10) + 1 pageNumber from ("
+				+ "select notice_num, user_id, notice_title, notice_contents, to_char(write_date, 'yyyy/mm/dd') \"write_date\" from notice order by notice_num desc)a)a where a.pageNumber = ? order by a.rnum";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int)pagingVO.getPage());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				NoticeVO vo = new NoticeVO();
+				vo.setNotice_num(rs.getLong("notice_num"));
+				vo.setUserid(rs.getString("user_id"));
+				vo.setNotice_title(rs.getString("notice_title"));
+				vo.setNotice_contents(rs.getString("notice_contents"));
+				vo.setWrite_date(rs.getString("write_date"));
+				
+				pagingList.add(vo);
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		
+		return pagingList;
+	}
+	
+	public HashMap<String, Object> getNoticePagingListCnt (NoticePagingVO pagingVO) {
+		HashMap<String, Object> noticePagingListCnt = new HashMap<String, Object>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*), ceil(count(*)/10) totalPage from notice order by notice_num desc";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				int totalPage = rs.getInt("totalPage");
+				pagingVO.setTotalPage(totalPage);
+				noticePagingListCnt.put("totalPage", totalPage);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return noticePagingListCnt;
+	}
 	
 
 }
