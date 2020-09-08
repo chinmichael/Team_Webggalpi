@@ -7,6 +7,7 @@ import com.webmark.controller.action.DeleteCategory;
 import com.webmark.controller.action.DeleteUrl;
 import com.webmark.controller.action.EditUrl;
 import com.webmark.controller.action.Logout;
+import com.webmark.controller.action.NoticeList;
 import com.webmark.controller.action.SampleLogin;
 import com.webmark.controller.action.SearchUrl;
 import com.webmark.controller.action.UrlList;
@@ -63,6 +64,10 @@ public class ActionFactory {
 		
 		case "delete_category":
 			action = new DeleteCategory();
+			break;
+		
+		case "notice_list":
+			action = new NoticeList();
 			break;
 			
 		}

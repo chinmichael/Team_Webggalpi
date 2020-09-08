@@ -15,46 +15,60 @@
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">First</th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
+						<th scope="col">Title</th>
+						<th scope="col">Writer</th>
+						<th scope="col">Date</th>
 					</tr>
 				</thead>
 				<tbody>
+					
+					<c:forEach var = "pagingList" items = "${pagingList }">
 					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
+						<th scope="row">${pagingList.getNotice_num() }</th>
+						<td>${pagingList.getNotice_title() }</td>
+						<td>${pagingList.getUserid() }</td>
+						<td>${pagingList.getWrite_date() }</td>
 					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
-					</tr>
+					</c:forEach>
+					
 				</tbody>
 			</table>
 		</div>
 
 		<%--notice paging --%>
+		
+		
 		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+			<ul class="pagination justify-content-center">
+
+				<c:if test="${resMap.pageGroup > 1 }">
+					<li class="page-item"><a class="page-link"
+						aria-label="Previous"
+						href="javascript:fnGoPaging(${resMap.prePage })">
+						<%-- href="javascript:fnGoPaging(<c:out values = '${resMap.prePage }'/>)">--%>
+							<span aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+				
+				<c:forEach var = "i" begin = "${resMap.startPage }" end = "${resMap.endPage > resMap.total ? resMap.total : resMap.endPage }" varStatus="status">
+					<c:choose>
+						<c:when test = "${resMap.page eq i }">
+							<li class="page-item"><a class="page-link" href="javascript:fnGoPaging(${i});">${i }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="javascript:fnGoPaging(${i});">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<c:if test="${resMap.nextPage <= resMap.total }">
+					<li class="page-item">
+					<a class="page-link" href="javascript:fnGoPaging(${resMap.nextPage })"
+					<%-- <c:out value='${resMap.nextPage }'/>--%>
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
+
 			</ul>
 		</nav>
 

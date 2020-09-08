@@ -8,7 +8,7 @@
 		<c:forEach var="urlL" items="${urlList }">
 
 			<li class="list-group-item" style="line-height: 40px;"><a
-				href="${urlL.url_address }">${urlL.url_name}</a> <%-- Button trigger modal --%>
+				href="${urlL.url_address }" target="_blank">${urlL.url_name}</a> <%-- Button trigger modal --%>
 				<a style = "color : gray;" href = "/KoseaFinalProject/WebmarkServlet?command=url_list&cat_no=${urlL.cat_no }"> ${urlL.cat_name }</a>
 				
 				<button type="button" class="btn btn-light float-right"

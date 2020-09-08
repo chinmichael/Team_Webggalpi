@@ -71,8 +71,16 @@ background-color: #EDF1F4;
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> <i
-						class="fas fa-user-tag"></i>&nbsp; ${account.usernick} &nbsp;
+					aria-haspopup="true" aria-expanded="false"> 
+					<c:choose>
+						<c:when test = "${account.usertype == '1' }">
+							<i class="fas fa-user-cog"></i>
+						</c:when>
+						<c:otherwise>
+							<i class="fas fa-user-tag"></i>
+						</c:otherwise>
+					</c:choose>
+					&nbsp; ${account.usernick} &nbsp;
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" href="#">Account</a>
@@ -116,7 +124,7 @@ background-color: #EDF1F4;
 								<!-- Notice -->
 								
 								<li class="nav-item"><a class="nav-link"
-										href=#>
+										href="/KoseaFinalProject/WebmarkServlet?command=notice_list">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-bullhorn"></i>&nbsp;
 											Noitce
 									</a></li>

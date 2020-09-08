@@ -410,7 +410,7 @@ public class MainDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select a.* from (select a.* ROWNUM rnum, FLOOR((ROWNUM - 1)/10) + 1 pageNumber from ("
+		String sql = "select a.* from (select a.*, ROWNUM rnum, FLOOR((ROWNUM - 1)/10) + 1 pageNumber from ("
 				+ "select notice_num, user_id, notice_title, notice_contents, to_char(write_date, 'yyyy/mm/dd') \"write_date\" from notice order by notice_num desc)a)a where a.pageNumber = ? order by a.rnum";
 		
 		try {

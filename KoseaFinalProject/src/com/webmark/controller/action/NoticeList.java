@@ -1,14 +1,5 @@
 //https://rwd337.tistory.com/206
 
-/*
- * <Resource name="jdbc/myoracle" auth="Container"
-              type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"
-              url="jdbc:oracle:thin:@127.0.0.1:1521:ChinHR"
-              username="webmark" password="kosea" maxTotal="20" maxIdle="10"
-              maxWaitMillis="-1"/>
- * 
- */
-
 package com.webmark.controller.action;
 
 import java.io.IOException;
@@ -16,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -78,7 +70,9 @@ public class NoticeList implements Action {
 		request.setAttribute("pagingList", pagingList);
 		request.setAttribute("resMap", resMap);
 		
-		
+		String url = "/main/markNotice.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
 	}
 
 }
