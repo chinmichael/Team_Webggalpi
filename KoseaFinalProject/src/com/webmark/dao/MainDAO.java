@@ -411,7 +411,7 @@ public class MainDAO {
 		ResultSet rs = null;
 		
 		String sql = "select a.* from (select a.*, ROWNUM rnum, FLOOR((ROWNUM - 1)/10) + 1 pageNumber from ("
-				+ "select notice_num, user_id, notice_title, notice_contents, to_char(write_date, 'yyyy/mm/dd') \"write_date\" from notice order by notice_num desc)a)a where a.pageNumber = ? order by a.rnum";
+				+ "select notice_num, user_id, notice_title, to_char(write_date, 'yyyy/mm/dd') \"write_date\" from notice order by notice_num desc)a)a where a.pageNumber = ? order by a.rnum";
 		
 		try {
 			conn = DBManager.getConnection();
@@ -424,7 +424,6 @@ public class MainDAO {
 				vo.setNotice_num(rs.getLong("notice_num"));
 				vo.setUserid(rs.getString("user_id"));
 				vo.setNotice_title(rs.getString("notice_title"));
-				vo.setNotice_contents(rs.getString("notice_contents"));
 				vo.setWrite_date(rs.getString("write_date"));
 				
 				pagingList.add(vo);
@@ -467,6 +466,43 @@ public class MainDAO {
 		}
 		
 		return noticePagingListCnt;
+	}
+	
+	public NoticeVO getNoticeContents (long notice_num) {
+		
+		NoticeVO vo = new NoticeVO();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select notice_num, user_id, notice_contents, notice_title, notice_attach, to_char(write_date, 'yyyy/mm/dd') \"write_date\""
+				+ " from notice where notice_num = ?";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, notice_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setNotice_num(rs.getLong("notice_num"));
+				vo.setNotice_title(rs.getString("notice_title"));
+				vo.setNotice_contents(rs.getString("notice_contents"));
+				vo.setUserid(rs.getString("user_id"));
+				vo.setWrite_date(rs.getString("write_date"));
+				vo.setNotice_attach(rs.getString("notice_attach"));
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return vo;
+		
 	}
 	
 

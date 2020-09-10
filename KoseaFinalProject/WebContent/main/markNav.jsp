@@ -28,8 +28,8 @@ padding: 0;
 .container-fluid {
 min-height: 94%; 
 position: relative;
+overflow: auto;
 }
-
 
 footer {
 position: absolute;
@@ -37,7 +37,6 @@ bottom: 0;
 right: 0;
 width: 100%;
 height: 50px;
-
 padding: 12px 0px;
 
 color: #848484;
@@ -99,7 +98,7 @@ background-color: #EDF1F4;
 
 	<!-- category -->
 	<div class="container-fluid">
-		<div class="row min-vh-100 flex-column flex-md-row">
+		<div class="row min-vh-100 flex-column flex-md-row" style = "margin-bottom: 50px;">
 
 			<aside class="col-12 col-md-2 p-0 bg-light flex-shrink-1"
 				style="overflow: auto;">

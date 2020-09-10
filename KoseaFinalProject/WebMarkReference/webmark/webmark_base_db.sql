@@ -51,9 +51,9 @@ CREATE TABLE notice (
 	notice_num	NUMBER		NOT NULL,
 	user_id		VARCHAR2(100),
 	notice_title	VARCHAR2(1000)	NOT NULL,
-	notice_contents	CLOB		NOT NULL,
+	notice_contents	CLOB,
 	write_date	DATE		DEFAULT SYSDATE,
-	/*notice_attach	BLOB,*/
+	notice_attach	CLOB,
 	CONSTRAINT PK_noitce		PRIMARY KEY(notice_num),
 	CONSTRAINT FK_notice		FOREIGN KEY(user_id)	REFERENCES accountwm	ON DELETE SET NULL
 );
@@ -64,9 +64,9 @@ CREATE TABLE board (
 	board_num	NUMBER		NOT NULL,
 	user_id		VARCHAR2(100)	NOT NULL,
 	board_title	VARCHAR2(1000)	NOT NULL,
-	board_contents	CLOB		NOT NULL,
+	board_contents	CLOB,
 	write_date	DATE		DEFAULT SYSDATE,
-	/*board_attach	BLOB,*/
+	board_attach	CLOB,
 	CONSTRAINT PK_board		PRIMARY KEY(board_num),
 	CONSTRAINT FK_board		FOREIGN KEY(user_id)	REFERENCES accountwm	ON DELETE CASCADE 
 );

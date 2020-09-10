@@ -25,7 +25,8 @@
 					<c:forEach var = "pagingList" items = "${pagingList }">
 					<tr>
 						<th scope="row">${pagingList.getNotice_num() }</th>
-						<td>${pagingList.getNotice_title() }</td>
+						<td><a href = "/KoseaFinalProject/WebmarkServlet?command=notice_board&notice_num=${pagingList.getNotice_num()}">
+						${pagingList.getNotice_title() }</a></td>
 						<td>${pagingList.getUserid() }</td>
 						<td>${pagingList.getWrite_date() }</td>
 					</tr>
@@ -33,17 +34,29 @@
 					
 				</tbody>
 			</table>
-		</div>
-
-		<%--notice paging --%>
+			
 		
+		<%--notice add only by admin --%>
+		
+		<c:if test = "${account.getUsertype() == '1' }">
+			<hr>
+			<button type="button" class="btn btn-light btn-lg btn-block btn-sm"
+				style="border-radius: 10px; box-shadow: none;"
+				onclick="location.href='/KoseaFinalProject/main/noticeWrite.jsp'">
+				<i class="fas fa-plus"></i>
+			</button>
+			
+		</c:if>
+		<hr>
+		</div>
+		<%--notice paging --%>
 		
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 
 				<c:if test="${resMap.pageGroup > 1 }">
 					<li class="page-item"><a class="page-link"
-						aria-label="Previous"
+						aria-label="Previous" style = "color: gray;"
 						href="javascript:fnGoPaging(${resMap.prePage })">
 						<%-- href="javascript:fnGoPaging(<c:out values = '${resMap.prePage }'/>)">--%>
 							<span aria-hidden="true">&laquo;</span>
@@ -53,10 +66,10 @@
 				<c:forEach var = "i" begin = "${resMap.startPage }" end = "${resMap.endPage > resMap.total ? resMap.total : resMap.endPage }" varStatus="status">
 					<c:choose>
 						<c:when test = "${resMap.page eq i }">
-							<li class="page-item"><a class="page-link" href="javascript:fnGoPaging(${i});">${i }</a></li>
+							<li class="page-item"><a class="page-link" href="javascript:fnGoPaging(${i});" style = "color: gray;">${i }</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="javascript:fnGoPaging(${i});">${i }</a></li>
+							<li class="page-item"><a class="page-link" href="javascript:fnGoPaging(${i});" style = "color: gray;">${i }</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -65,7 +78,7 @@
 					<li class="page-item">
 					<a class="page-link" href="javascript:fnGoPaging(${resMap.nextPage })"
 					<%-- <c:out value='${resMap.nextPage }'/>--%>
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						aria-label="Next" style = "color: gray;"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>
 

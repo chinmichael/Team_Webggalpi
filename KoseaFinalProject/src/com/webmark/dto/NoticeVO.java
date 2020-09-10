@@ -7,6 +7,7 @@ public class NoticeVO {
 	private String notice_title;
 	private String notice_contents;
 	private String write_date;
+	private String notice_attach;
 	
 	
 	public long getNotice_num() {
@@ -39,6 +40,13 @@ public class NoticeVO {
 	public void setWrite_date(String write_date) {
 		this.write_date = write_date;
 	}
+	public String getNotice_attach() {
+		return notice_attach;
+	}
+	public void setNotice_attach(String notice_attach) {
+		this.notice_attach = notice_attach;
+	}
+	
 	
 
 }

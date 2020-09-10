@@ -46,7 +46,6 @@ public class NoticeList implements Action {
 		HashMap<String, Object> resMap = new HashMap<String, Object>();
 		
 		resMap.put("total", noticePagingListCnt.get("totalPage"));
-		System.out.println("command total : " + noticePagingListCnt.get("totalPage"));
 		resMap.put("page", vo.getPage());
 		resMap.put("pageScale", vo.getPageScale());
 		
