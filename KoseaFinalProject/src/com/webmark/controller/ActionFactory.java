@@ -9,6 +9,7 @@ import com.webmark.controller.action.EditUrl;
 import com.webmark.controller.action.Logout;
 import com.webmark.controller.action.NoticeBoard;
 import com.webmark.controller.action.NoticeList;
+import com.webmark.controller.action.NoticeWrite;
 import com.webmark.controller.action.SampleLogin;
 import com.webmark.controller.action.SearchUrl;
 import com.webmark.controller.action.UrlList;
@@ -73,6 +74,10 @@ public class ActionFactory {
 			
 		case "notice_board":
 			action = new NoticeBoard();
+			break;
+			
+		case "notice_write":
+			action = new NoticeWrite();
 			break;
 			
 		}

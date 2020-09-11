@@ -1,3 +1,16 @@
+
+<%--<error-page><!--404에러처리-->
+    <error-code>404</error-code>
+    <location>/404errorPage.jsp</location>
+  </error-page>
+  
+  <error-page><!--500에러처리-->
+    <error-code>500</error-code>
+    <location>/500errorPage.jsp</location>
+  </error-page>--%>
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	

@@ -31,7 +31,7 @@
 					<tr>
 						<th scope="col" class="table-active" style = "width:8.33%; text-align: center;">Attach</th>
 						<th scope="col" style = "width:50%; padding: 9px">
-						<input type="file" class="form-control-file" id="exampleFormControlFile1">
+						<input type="file" class="form-control-file" name = "noticeAttach" id="noticeAttach">
 						</th>
 					</tr>
 				
@@ -39,6 +39,7 @@
 					<tr>
 						<td colspan = "2" style = "padding: 8px;">
 						<textarea class="form-control" style="height:400px;"
+						name = "noticeContents"
 						placeholder="Notice Contents" required></textarea>
 						</td>
 					</tr>
@@ -52,7 +53,7 @@
 			</button>
 			<button type="button" class="btn btn-light float-right"
 					style="box-shadow: none; font-weight: none; margin-right:10px"
-					onclick = "location.href='/KoseaFinalProject/WebmarkServlet?command=notice_list'">
+					id = "noticeWriteBtn">
 					<i class="fas fa-pencil-alt"></i>&nbsp; Submit
 			</button>
 
