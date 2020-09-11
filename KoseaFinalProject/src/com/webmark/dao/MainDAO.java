@@ -505,5 +505,43 @@ public class MainDAO {
 		
 	}
 	
+	public int insertNotice (NoticeVO vo, boolean flg) {
+		
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "";
+		if(flg) {
+			sql = "insert into notice (notice_num,user_id,notice_title,notice_contents,notice_attach) "
+					+ "values (notice_seq.nextval,?,?,?,?)";
+		} else {
+			sql = "insert into notice (notice_num,user_id,notice_title,notice_contents) "
+					+ "values (notice_seq.nextval,?,?,?)";
+		}
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUserid());
+			pstmt.setString(2, vo.getNotice_title());
+			pstmt.setString(3, vo.getNotice_contents());
+			if(flg) {
+				pstmt.setString(4, vo.getNotice_attach());
+			}
+			
+			pstmt.execute();
+			result = 1;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return result;
+		
+	}
+	
 
 }

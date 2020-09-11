@@ -11,7 +11,7 @@
 	<main class="col-md-8 bg-faded py-3 flex-grow-1">
 
 		<%--notice form --%>
-		<form name = "noticeWFrm" method = "post" enctype = "multipart/form-data"
+		<form name = "noticeWFrm" id = "noticeWFrm" method = "post" enctype = "multipart/form-data"
 			action = "/KoseaFinalProject/WebmarkServlet?command=notice_write">
 
 			<table class="table table-bordered">

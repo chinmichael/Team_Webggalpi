@@ -14,6 +14,12 @@
 						<td><h4 style = "padding-top: 3px;">${noticeCon.getNotice_title() }</h4></td>
 					</tr>
 					<tr class="table-light">
+						<td>
+						<c:if test = "${not empty noticeCon.getNotice_attach() }">
+							<a href="/KoseaFinalProject/download.jsp?filename=${noticeCon.getNotice_attach() }">
+							<i class="fas fa-paperclip"></i>&nbsp;${noticeCon.getNotice_attach() }</a>
+						</c:if>
+						</td>
 						<td style = "color: gray; text-decoration: none; padding : 8px; margin-top : 0px; text-align: right;">
 						<i class="fas fa-pencil-alt"></i>&nbsp;${noticeCon.getUserid() }&nbsp;&nbsp;&nbsp;
 						<i class="far fa-calendar-alt"></i>&nbsp;&nbsp;${noticeCon.getWrite_date() }</td>
