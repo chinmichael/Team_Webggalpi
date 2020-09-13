@@ -10,6 +10,16 @@
 </footer>
 </div>
 
+<c:if test = "${empty account }">
+		<script type = "text/javascript">
+			window.onload = function() {
+				alert("There is no login information.");
+				location.href="/KoseaFinalProject/main/sampleaccount.jsp";
+			};
+		</script>
+		
+</c:if>
+
 <c:if test="${not empty message }">
 	<input type = "hidden" value = "${message }" id = "message">
 	<script type="text/javascript">

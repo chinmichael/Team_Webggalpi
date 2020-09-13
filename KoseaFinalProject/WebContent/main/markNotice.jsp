@@ -90,7 +90,7 @@
 	
 	<script>
 		function fnGoPaging(page){
-			location.href = "/KoseaFinalProject/WebmarkServlet?command=" + page;
+			location.href = "/KoseaFinalProject/WebmarkServlet?command=notice_list&page=" + page;
 		}
 	</script>
 	<jsp:include page="/main/markBottom.jsp"></jsp:include>

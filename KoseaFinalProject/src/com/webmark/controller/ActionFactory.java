@@ -8,6 +8,9 @@ import com.webmark.controller.action.DeleteUrl;
 import com.webmark.controller.action.EditUrl;
 import com.webmark.controller.action.Logout;
 import com.webmark.controller.action.NoticeBoard;
+import com.webmark.controller.action.NoticeDelete;
+import com.webmark.controller.action.NoticeEdit;
+import com.webmark.controller.action.NoticeEditReady;
 import com.webmark.controller.action.NoticeList;
 import com.webmark.controller.action.NoticeWrite;
 import com.webmark.controller.action.SampleLogin;
@@ -78,6 +81,18 @@ public class ActionFactory {
 			
 		case "notice_write":
 			action = new NoticeWrite();
+			break;
+			
+		case "notice_edit_ready":
+			action = new NoticeEditReady();
+			break;
+			
+		case "notice_edit":
+			action = new NoticeEdit();
+			break;
+			
+		case "notice_delete":
+			action = new NoticeDelete();
 			break;
 			
 		}

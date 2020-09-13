@@ -23,7 +23,7 @@
 			<hr class="my-4">
 			<p>500 Internal Server Error</p>
 				<br>
-			<a class="btn btn-secondary btn-lg" href="#" role="button"> Go to Webggalpi Home </a>
+			<a class="btn btn-secondary btn-lg" href="/KoseaFinalProject/tempCover.jsp" role="button"> Go to Webggalpi Home </a>
 		</div>
 
 		<jsp:include page="/errorPage/errorPageBottom.jsp"></jsp:include>

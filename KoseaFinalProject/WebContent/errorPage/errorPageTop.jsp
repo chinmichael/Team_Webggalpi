@@ -60,7 +60,7 @@ footer {
 
 <!-- navigation -->
 	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="#"><i class="far fa-bookmark"></i>&nbsp;&nbsp;Webggalpi</a>
+		<a class="navbar-brand" href="/KoseaFinalProject/tempCover.jsp"><i class="far fa-bookmark"></i>&nbsp;&nbsp;Webggalpi</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarTogglerDemo02"
 			aria-controls="navbarTogglerDemo02" aria-expanded="false"

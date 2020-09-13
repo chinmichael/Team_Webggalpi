@@ -543,5 +543,53 @@ public class MainDAO {
 		
 	}
 	
+	public int editNotice (NoticeVO vo) {
+		
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update notice set user_id = ?, notice_title = ?, notice_contents = ?, write_date = sysdate, notice_attach = ? where notice_num = ?";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUserid());
+			pstmt.setString(2, vo.getNotice_title());
+			pstmt.setString(3, vo.getNotice_contents());
+			pstmt.setString(4, vo.getNotice_attach());
+			pstmt.setLong(5, vo.getNotice_num());
+			
+			pstmt.execute();
+			result = 1;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return result;
+	}
+	
+	public void deleteNotice(long notice_num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from notice where notice_num = ?";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, notice_num);
+			
+			pstmt.execute();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+	}
+	
 
 }

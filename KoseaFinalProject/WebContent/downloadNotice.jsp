@@ -9,9 +9,7 @@
 	response.reset();
 	String fileName = request.getParameter("filename");
 	
-	System.out.println(fileName);
-	
-	String uploadPath = request.getRealPath("upload");
+	String uploadPath = "C:\\webmark\\upload\\notice";
 	String path = uploadPath.trim() + "//" + fileName.trim();
 	
 	String fileName2 = URLEncoder.encode(fileName, "UTF-8");
@@ -23,7 +21,7 @@
 	response.setHeader("Expires", "-1;");
 	
 	out.clear();
-	out.page.Context.pushBody();
+	out = pageContext.pushBody();
 	
 	try {
 		FileDownloadHelper.copy(path, response.getOutputStream());

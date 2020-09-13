@@ -11,12 +11,12 @@
 		<div class="table-responsive">
 			<table class="table table-borderless">
 					<tr class="table-active">
-						<td><h4 style = "padding-top: 3px;">${noticeCon.getNotice_title() }</h4></td>
+						<td colspan = "2"><h4 style = "padding-top: 3px;">${noticeCon.getNotice_title() }</h4></td>
 					</tr>
 					<tr class="table-light">
 						<td>
 						<c:if test = "${not empty noticeCon.getNotice_attach() }">
-							<a href="/KoseaFinalProject/download.jsp?filename=${noticeCon.getNotice_attach() }">
+							<a href="/KoseaFinalProject/downloadNotice.jsp?filename=${noticeCon.getNotice_attach() }">
 							<i class="fas fa-paperclip"></i>&nbsp;${noticeCon.getNotice_attach() }</a>
 						</c:if>
 						</td>
@@ -26,7 +26,7 @@
 					</tr>
 
 					<tr>
-						<td style = "padding-top: 20px; padding-bottom : 20px;">${noticeCon.getNotice_contents() }</td>
+						<td colspan = "2" style = "padding-top: 20px; padding-bottom : 20px;">${noticeCon.getNotice_contents() }</td>
 					</tr>
 					<tr>
 					</tr>
@@ -40,13 +40,41 @@
 				test="${noticeCon.getUserid() == account.getUserid() || (empty noticeCon.getUserid() && account.getUsertype == '1') }">
 				<button type="button" class="btn btn-light float-right"
 					style="box-shadow: none; font-weight: none;" data-toggle="modal"
-					data-target="#editURLModal${urlL.url_num }">
+					data-target="#trashNoticeModal">
 					<i class="fas fa-trash"></i>
 				</button>
+				
+				<%--trash modal --%>
+				<div class="modal fade" id="trashNoticeModal" tabindex="-1"
+					aria-labelledby="trashNoticeModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="trashNoticeModalLabel">Caution</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close" style="outline: none;">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">Are you sure delete this notice?</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal" style="box-shadow: none;">Close</button>
+								<form name="delNoticeFrm" method="post"
+									action="/KoseaFinalProject/WebmarkServlet?command=notice_delete">
+									<input type="hidden" name="notice_num" value="${noticeCon.getNotice_num()}">
+									<input type="submit" class="btn btn-danger"
+										style="box-shadow: none;" value="Delete">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 				<button type="button" class="btn btn-light float-right"
 					style="box-shadow: none; font-weight: none; margin-left: 5px; margin-right: 5px;"
-					data-toggle="modal" data-target="#editURLModal${urlL.url_num }">
+					onclick = "location.href='/KoseaFinalProject/WebmarkServlet?command=notice_edit_ready&notice_num=${noticeCon.getNotice_num()}'">
 					<i class="fas fa-edit"></i>
 				</button>
 

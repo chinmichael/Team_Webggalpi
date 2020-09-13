@@ -17,7 +17,7 @@ public class Logout implements Action {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		String url = "/main/sampleaccount.jsp";
+		String url = "/tempCover.jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

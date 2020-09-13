@@ -137,12 +137,60 @@ $(document).ready(function(){
 			check = false;
 			return;
 			}
+			
+		if($("#noticeAttach").val() != "") {
+				var fileSize = document.getElementById("noticeAttach").files[0].size;
+				var maxSize = 10*1024*1024;
+				if(fileSize > maxSize) {
+					alert("file size over");
+					$("#noticeAttach").focus();
+					check = false;
+					return;
+				}
+				
+			}
 
 		if(check) {
 			$("#noticeWFrm").submit();
 		}
 
 	});
+	
+	$("#noticeEditBtn").click(function(){
+
+		var title = $("#noticeTitleE").val();
+		var check = true;
+
+		if(title == '' || title == null) {
+			alert("Please input notice title");
+			$("#noticeTitleE").focus();
+
+			check = false;
+			return;
+			}
+			
+		if($("#noticeAttachFlg").val() == "true") {
+			
+			if($("#noticeAttachE").val() != "") {
+				var fileSize = document.getElementById("noticeAttachE").files[0].size;
+				var maxSize = 10*1024*1024;
+				if(fileSize > maxSize) {
+					alert("file size over");
+					$("#noticeAttachE").focus();
+					check = false;
+					return;
+				}
+				
+			}
+		}	
+			
+
+		if(check) {
+			$("#noticeEFrm").submit();
+		}
+
+	});
+	
 
 
 });
