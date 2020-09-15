@@ -17,7 +17,7 @@
 			<c:when test="${empty cat_no && empty urlList}">
 				<div class="jumbotron jumbotron-fluid" style = "text-align : center; margin-bottom : 100px;">
 					<div class="container">
-						<h1 class="display-4">Welcome to Webggalpi!!</h1>
+						<h1 class="display-4">Welcome to Webgalpi!!</h1>
 						<br>
 						<p class="lead">
 							If you don't have any category, please start <a id="addCatModal2"

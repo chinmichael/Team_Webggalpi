@@ -1,16 +1,3 @@
-
-<%--<error-page><!--404에러처리-->
-    <error-code>404</error-code>
-    <location>/404errorPage.jsp</location>
-  </error-page>
-  
-  <error-page><!--500에러처리-->
-    <error-code>500</error-code>
-    <location>/500errorPage.jsp</location>
-  </error-page>--%>
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
@@ -107,8 +94,11 @@ footer {
 					</c:when>
 					<c:otherwise>
 
-						<li class="nav-item"><a class="nav-link" href="#"><i
-								class="fas fa-user-check"></i> &nbsp; Sign-in &nbsp; </a></li>
+						<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/main/sampleaccount.jsp">
+						<i class="fas fa-user-check"></i> &nbsp; Sign-in &nbsp; </a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="#">
+						<i class="fas fa-user-edit"></i> &nbsp; Sign-up &nbsp; </a></li>
 
 					</c:otherwise>
 				</c:choose>

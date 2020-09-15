@@ -1,23 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<c:choose>
-<c:when test = "${not empty account }">
-<h1><a href = "/KoseaFinalProject/main/markList.jsp">메인 리스트로</a></h1>
-<br>
-<h1><a href = "/KoseaFinalProject/WebmarkServlet?command=logout">로그아웃</a></h1>
-</c:when>
-<c:otherwise>
-<h1><a href = "/KoseaFinalProject/main/sampleaccount.jsp">임시 로그인으로</a></h1>
-</c:otherwise>
-</c:choose>
+<body style = "background-color: #BDBDBD;">
 
+	<jsp:include page="/coverTop.jsp"></jsp:include>
+	<div class="container-fluid">
+		
+
+		<div class="jumbotron" style = "margin-top : 0px; margin-bottom : 50px; background-color:#BDBDBD; text-align: center;">
+
+			<figure class="figure">
+				<img src="/KoseaFinalProject/resource/image/coverLogo2.jpg" class="figure-img img-fluid rounded" alt="...">
+				<figcaption class="figure-caption">Welcome to our Webgalpi site!</figcaption>
+			</figure>
+
+			
+			<c:choose>
+				<c:when test = "${empty account }">
+					<hr class="my-4">
+					<p>Do you have any Webgalpi ID yet?</p>
+					<a class="btn btn-dark btn-lg" href="#" role="button">Sign Up</a>
+				</c:when>
+				<c:otherwise>
+					<hr class="my-4">
+					<p>Have a good day!!</p>
+					<a class="btn btn-dark btn-lg" href="/KoseaFinalProject/main/markList.jsp" role="button">Go Webgalpi List!!</a>
+
+				</c:otherwise>
+			</c:choose>
+			
+		</div>
+
+
+		<jsp:include page="/coverBottom.jsp"></jsp:include>
 </body>
 </html>
