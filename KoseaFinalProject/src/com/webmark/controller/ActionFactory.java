@@ -14,6 +14,7 @@ import com.webmark.controller.action.NoticeEditReady;
 import com.webmark.controller.action.NoticeList;
 import com.webmark.controller.action.NoticeWrite;
 import com.webmark.controller.action.SampleLogin;
+import com.webmark.controller.action.SearchNotice;
 import com.webmark.controller.action.SearchUrl;
 import com.webmark.controller.action.UrlList;
 
@@ -93,6 +94,10 @@ public class ActionFactory {
 			
 		case "notice_delete":
 			action = new NoticeDelete();
+			break;
+			
+		case "search_notice":
+			action = new SearchNotice();
 			break;
 			
 		}

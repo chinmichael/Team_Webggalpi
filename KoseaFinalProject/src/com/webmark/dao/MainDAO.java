@@ -441,6 +441,7 @@ public class MainDAO {
 	}
 	
 	public HashMap<String, Object> getNoticePagingListCnt (NoticePagingVO pagingVO) {
+		
 		HashMap<String, Object> noticePagingListCnt = new HashMap<String, Object>();
 		
 		Connection conn = null;
@@ -466,6 +467,97 @@ public class MainDAO {
 		}
 		
 		return noticePagingListCnt;
+	}
+	
+	public List<NoticeVO> getSearchNoticePagingList(NoticePagingVO paging, String searchName, boolean searchType) {
+		
+		List<NoticeVO> pagingList = new Vector<NoticeVO>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String changeName = "%" + searchName + "%";
+		
+		String sql = "";
+		
+		if(searchType) {
+			sql = "select a.* from (select a.*, ROWNUM rnum, FLOOR((ROWNUM - 1)/10) + 1 pageNumber from ("
+					+ "select notice_num, user_id, notice_title, to_char(write_date, 'yyyy/mm/dd') \"write_date\" from notice where notice_title like ? order by notice_num desc)a)a "
+					+ "where a.pageNumber = ? order by a.rnum";
+			
+		} else {
+			sql = "select a.* from (select a.*, ROWNUM rnum, FLOOR((ROWNUM - 1)/10) + 1 pageNumber from ("
+					+ "select notice_num, user_id, notice_title, to_char(write_date, 'yyyy/mm/dd') \"write_date\" from notice where user_id like ? order by notice_num desc)a)a "
+					+ "where a.pageNumber = ? order by a.rnum";
+			
+		}
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, changeName);
+			pstmt.setInt(2, (int)paging.getPage());
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				NoticeVO vo = new NoticeVO();
+				vo.setNotice_num(rs.getLong("notice_num"));
+				vo.setUserid(rs.getString("user_id"));
+				vo.setNotice_title(rs.getString("notice_title"));
+				vo.setWrite_date(rs.getString("write_date"));
+				
+				pagingList.add(vo);
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return pagingList;
+	}
+	
+	public HashMap<String, Object> getSearchNoticePagingCnt(NoticePagingVO paging, String searchName, boolean searchType) {
+		
+		HashMap<String, Object> searchNoticePagingCnt = new HashMap<String, Object>();
+		
+		String changeName = "%" + searchName + "%";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		if(searchType) {
+			sql = "select count(*), ceil(count(*)/10) totalPage from notice where notice_title like ? order by notice_num desc";
+		} else {
+			sql = "select count(*), ceil(count(*)/10) totalPage from notice where user_id like ? order by notice_num desc";
+		}
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, changeName);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int totalPage = rs.getInt("totalPage");
+				paging.setTotalPage(totalPage);
+				searchNoticePagingCnt.put("totalPage", totalPage);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		
+		return searchNoticePagingCnt;
 	}
 	
 	public NoticeVO getNoticeContents (long notice_num) {

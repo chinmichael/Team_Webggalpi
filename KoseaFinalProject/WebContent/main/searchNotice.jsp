@@ -52,7 +52,8 @@
 		
 		<div>
 			<form class="form-inline my-0 my-lg-0 justify-content-end" method="post"
-			action="/KoseaFinalProject/WebmarkServlet?command=search_notice">
+			action="/KoseaFinalProject/WebmarkServlet?command=search_notice"
+			name = "searchNoticeFrm" id = "searchNoticeFrm">
 
 				<div class="form-group mx-sm-0 mb-2">
 					<select class="custom-select mr-sm-0" id="noticeSearchType"
@@ -114,13 +115,18 @@
 			</ul>
 			
 		</nav>
+		
+		<input type = "hidden" id = "requestSearchName" value = "${searchName}">
+		<input type = "hidden" id = "requestSearchType" value = "${searchTypeParameter}">
 
 	</main>
 	</div>
 	
 	<script>
 		function fnGoPaging(page){
-			location.href = "/KoseaFinalProject/WebmarkServlet?command=notice_list&page=" + page;
+			var searchName = document.getElementById("requestSearchName").value;
+			var searchType = document.getElementById("requestSearchType").value;
+			location.href = "/KoseaFinalProject/WebmarkServlet?command=search_notice&noticeSearch="+searchName+"&noticeSearchType="+searchType+"&page=" + page;
 		}
 	</script>
 	<jsp:include page="/main/markBottom.jsp"></jsp:include>

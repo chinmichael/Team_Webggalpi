@@ -9,7 +9,7 @@
 <body>
 
 	<div class="modal fade" id="addCategoryModal2" tabindex="-1"
-		aria-labelledby="addCategoryModal2Label" aria-hidden="true">
+		aria-labelledby="addCategoryModal2Label" aria-hidden="true" style = "text-align : left;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">

@@ -28,12 +28,18 @@ public class DBManager {
 		return conn;
 	}
 	
-	public static void close(Connection conn, Statement stmt, ResultSet rs) {
+	public static void close(Connection conn, Statement pstmt, ResultSet rs) {
 		
 		try {
-			rs.close();
-			stmt.close();
-			conn.close();
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

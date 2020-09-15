@@ -66,7 +66,7 @@ background-color: #EDF1F4;
 				
 			</ul>
 
-			<ul class="navbar-nav mr-sm-3 mt-2 mt-lg-0">
+			<ul class="navbar-nav mr-sm-3 mb-0 mt-lg-0" style = "padding-top: 2px;">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -89,9 +89,11 @@ background-color: #EDF1F4;
 			</ul>
 			
 
-			<form class="form-inline my-2 my-lg-0" method = "post" action = "/KoseaFinalProject/WebmarkServlet?command=search_url">
-				<input class="form-control mr-sm-2" type="text" name = "urlSearch" placeholder="Search" style = "height: calc(1.5em + 0.75rem - 5px); box-shadow:none;">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit" style = "height: calc(1.5em + 0.75rem - 5px); line-height: 0; box-shadow:none;"><i class="fas fa-search-location"></i></button>
+			<form class="form-inline my-1 my-lg-0" method = "post" action = "/KoseaFinalProject/WebmarkServlet?command=search_url">
+				<div class="form-group mb-0">
+				<input class="form-control mr-sm-1" type="text" name = "urlSearch" placeholder="Search" style = "height: calc(1.5em + 0.75rem - 5px); box-shadow:none;"></div>
+				<div class="form-group mx-sm-0 mb-0">&nbsp;
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit" style = "height: calc(1.5em + 0.75rem - 3px); line-height: 0; box-shadow:none;"><i class="fas fa-search-location"></i></button></div>
 			</form>
 		</div>
 	</nav>

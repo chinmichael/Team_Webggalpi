@@ -28,7 +28,7 @@
 						</th>
 					</tr>
 					<tr>
-						<th scope="col" class="table-active" style = "width:8.33%; text-align: center;">Attach(Under 10MB)</th>
+						<th scope="col" class="table-active" style = "width:8.33%; text-align: center;">Attach(Under10MB)</th>
 						<th scope="col" id = "attachTd" style = "width:50%; padding: 9px;">
 						<c:choose>
 							<c:when test="${not empty noticeCon.getNotice_attach() }">

@@ -30,7 +30,7 @@
 					</tr>
 					<tr>
 						<th scope="col" class="table-active" style = "width:8.33%; text-align: center; font-size: 12pt;">
-						Attach(Under 10MB)</th>
+						Attach(Under10MB)</th>
 						<th scope="col" style = "width:50%; padding: 9px;">
 						<input type="file" class="form-control-file" name = "noticeAttach" id="noticeAttach">
 						</th>

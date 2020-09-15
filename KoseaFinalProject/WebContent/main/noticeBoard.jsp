@@ -14,12 +14,6 @@
 						<td colspan = "2"><h4 style = "padding-top: 3px;">${noticeCon.getNotice_title() }</h4></td>
 					</tr>
 					<tr class="table-light">
-						<td>
-						<c:if test = "${not empty noticeCon.getNotice_attach() }">
-							<a href="/KoseaFinalProject/downloadNotice.jsp?filename=${noticeCon.getNotice_attach() }">
-							<i class="fas fa-paperclip"></i>&nbsp;${noticeCon.getNotice_attach() }</a>
-						</c:if>
-						</td>
 						<td style = "color: gray; text-decoration: none; padding : 8px; margin-top : 0px; text-align: right;">
 						<i class="fas fa-pencil-alt"></i>&nbsp;${noticeCon.getUserid() }&nbsp;&nbsp;&nbsp;
 						<i class="far fa-calendar-alt"></i>&nbsp;&nbsp;${noticeCon.getWrite_date() }</td>
@@ -29,10 +23,19 @@
 						<td colspan = "2" style = "padding-top: 20px; padding-bottom : 20px;">${noticeCon.getNotice_contents() }</td>
 					</tr>
 					<tr>
+						
 					</tr>
 
 			</table>
 		</div>
+
+		<c:if test="${not empty noticeCon.getNotice_attach() }">
+			<hr>&nbsp;&nbsp;Attached :&nbsp;
+			<a href="/KoseaFinalProject/downloadNotice.jsp?filename=${noticeCon.getNotice_attach() }">
+				<i class="fas fa-paperclip"></i>&nbsp;&nbsp;${noticeCon.getNotice_attach() }
+			</a>
+		</c:if>
+
 		<hr>
 		<%--button --%>
 		<c:choose>
