@@ -16,7 +16,7 @@
 <style>
 body {
 	color: #fff;
-	background: #344a71;
+	background: #BBE309;
 	font-family: 'Roboto', sans-serif;
 }
 .form-control {		
@@ -86,15 +86,11 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="/web-study-02/join.do" method="post" name="frm">
-		<h2>Sign Up</h2>
+    <form action="Account.do" method="post" name="frm">
+		<h2>Account modify</h2>
 		
 		<hr>
-        <div class="form-group">
-			<label>Username</label>
-        	<input type="text" class="form-control" name="user_id" required="required">
-        	<input type="hidden" class="form-control" name="re_id"> 
-        </div>
+ 
         <div class="form-group">
 			<label>Email Address</label>
         	<input type="email" class="form-control" name="e_mail" required="required">
@@ -116,12 +112,9 @@ body {
             <input type="password" class="form-control" name="confirm_pw" required="required">
         </div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block btn-lg"
-            >Sign Up</button>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">change Up</button>
         </div>
-		<p class="small text-center">난니 고막의순결을뺏지 <br><a href="#">뒤로가기</a>, and <a href="#">돌아가기</a></p>
     </form>
-	<div class="text-center">Already have an account? <a href="/web-study-02/member/login.jsp">Login here</a></div>
 </div>
 </body>
 </html>
