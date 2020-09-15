@@ -1,4 +1,4 @@
-package com.saeyan.controller;
+package com.webmark.controller.action;
 
 import java.io.IOException;
 
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.saeyan.dto.AccountVO;
-import com.saeyan.dto.MemberDAO;
+import com.webmark.dao.AccountDAO;
+import com.webmark.dto.AccountVO;
 /**
  * Servlet implementation class JoinServlet
  */
 @WebServlet("/Account.do")
-public class AccountServlet extends HttpServlet {
+public class AccountModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccountServlet() {
+    public AccountModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -56,8 +56,8 @@ public class AccountServlet extends HttpServlet {
 		mVo.setUsernick(user_nick);
 		mVo.setEmail(e_mail);
 		
-		MemberDAO mDao = MemberDAO.getInstance();
-		int result=mDao.modifyAccount(mVo);
+		AccountDAO dao = AccountDAO.getInstance();
+		int result = dao.modifyAccount(mVo);
 		
 		HttpSession session =request.getSession();
 		

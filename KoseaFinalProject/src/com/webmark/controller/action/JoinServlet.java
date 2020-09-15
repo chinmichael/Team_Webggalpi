@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.saeyan.dto.AccountVO;
-import com.saeyan.dto.MemberDAO;
+import com.webmark.dao.LoginDAO;
+import com.webmark.dto.AccountVO;
 /**
  * Servlet implementation class JoinServlet
  */
@@ -30,12 +30,12 @@ public class JoinServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-	RequestDispatcher dispatcher = request
-			.getRequestDispatcher("member/join.jsp");
-	dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/join.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class JoinServlet extends HttpServlet {
 		mVo.setUsernick(user_nick);
 		mVo.setEmail(e_mail);
 		
-		MemberDAO mDao = MemberDAO.getInstance();
+		LoginDAO mDao = LoginDAO.getInstance();
 		int result=mDao.insertaccountwm(mVo);
 		
 		HttpSession session =request.getSession();

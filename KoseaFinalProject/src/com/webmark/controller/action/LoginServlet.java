@@ -1,6 +1,7 @@
 package com.webmark.controller.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.saeyan.dto.MemberDAO;
-import com.saeyan.dto.AccountVO;
+import com.webmark.dao.LoginDAO;
+import com.webmark.dao.MainDAO;
+import com.webmark.dto.AccountVO;
+import com.webmark.dto.CategoryVO;
 /**
  * Servlet implementation class LoginServlet
  */
@@ -51,15 +54,19 @@ public class LoginServlet extends HttpServlet {
       String user_id = request.getParameter("user_id");
       String user_pw = request.getParameter("user_pw");
 	 
-      MemberDAO mDao = MemberDAO.getInstance();
+      LoginDAO mDao = LoginDAO.getInstance();
       int result =mDao.userCheck(user_id, user_pw);
       
       if(result==1) {
     	  AccountVO mVo = mDao.getMember(user_id);
+    	  MainDAO dao = MainDAO.getInstance();
+    	  List<CategoryVO> list = dao.getCategoryList(user_id);
+    	  
     	  HttpSession session = request.getSession();
-    	  session.setAttribute("loginUser", mVo);
-    	  request.setAttribute("message", "회원 가입에 성공했습니다.");
-    	  url="/main.jsp";
+    	  session.setAttribute("Account", mVo);
+    	  session.setAttribute("categoryList", list);
+    	  session.setMaxInactiveInterval(24*60*60);
+    	  url="/main/markList.jsp";
     	  
       }else if(result==0) {
     	  request.setAttribute("message", "비밀번호가 맞지 않습니다.");
