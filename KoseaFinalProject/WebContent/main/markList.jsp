@@ -130,7 +130,7 @@
 												</div>
 												<div class="form-group">
 													<label for="urlTagE" class="col-form-label">Tag
-														(Divide by '#', Maximum '5') :</label> <input type="text"
+														(Divide by '#') :</label> <input type="text"
 														class="form-control" id="urlTagE" name="urlTagE"
 														value="${urlL.tag }">
 												</div>

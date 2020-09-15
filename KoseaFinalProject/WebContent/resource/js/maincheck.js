@@ -78,7 +78,7 @@ $(document).ready(function(){
 		if(link == '' || link == null) {
 			alert("Please input url address");
 			$("#urlLink").focus();
-
+			alert(tag);
 			check = false;
 			return;
 			}
@@ -89,6 +89,7 @@ $(document).ready(function(){
 			check = false;
 			return;
 			}
+
 
 
 		if(check) {

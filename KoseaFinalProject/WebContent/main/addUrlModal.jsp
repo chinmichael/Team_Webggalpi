@@ -32,8 +32,7 @@
 								type="text" class="form-control" id="urlName" name="urlName">
 						</div>
 						<div class="form-group">
-							<label for="urlTag" class="col-form-label">Tag (Divide by
-								'#', Maximum '5') :</label> <input type="text" class="form-control"
+							<label for="urlTag" class="col-form-label">Tag (Divide by '#') :</label> <input type="text" class="form-control"
 								id="urlTag" name="urlTag">
 						</div>
 
