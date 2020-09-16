@@ -1,3 +1,4 @@
+
 <%@ page language ="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,9 +9,7 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="script/member.js"></script>
+
 <style>
     body {
 		font-family: 'Varela Round', sans-serif;
@@ -101,6 +100,8 @@ pageEncoding="UTF-8"%>
     <div class="text-center">
         <!-- Button HTML (to Trigger Modal) -->
         <a href="#myModal" class="trigger-btn" data-toggle="modal">Click to Open Login Modal</a>
+        <br><br>
+        <a href="/KoseaFinalProject/tempCover.jsp">Go to Home page</a>
     </div>
     
     <!-- Modal HTML -->
@@ -119,7 +120,7 @@ pageEncoding="UTF-8"%>
     </button>
 
     <div class="modal-body">
-<form action="/web-study-02/login.do" method="post" name="frm">
+<form action="/KoseaFinalProject/login.do" method="post" name="frm">
    <div class="form-group">
        <input type="text" class="form-control" name="userid" value="${uesr_id}" placeholder="Username"
        required="required">
@@ -134,15 +135,15 @@ pageEncoding="UTF-8"%>
         onclick="return loginCheck()">Login</button>
     </div>
     <div class="text-center">
-    	<a href="/web-study-02/member/join.jsp">아직 회원이 아니신가요?</a>
+    	<a href="/KoseaFinalProject/login/join.jsp">아직 회원이 아니신가요?</a>
     </div>
 
 </form>
    
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="script/member.js"></script>
    
-
 </body>
-
 
 </html>

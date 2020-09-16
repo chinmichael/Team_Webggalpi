@@ -98,7 +98,7 @@ footer {
 						</a>
 							<div class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="#">Account</a>
+								<a class="dropdown-item" href="/KoseaFinalProject/account/AccountModify.jsp">Account</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item"
 									href="/KoseaFinalProject/WebmarkServlet?command=logout">Logout</a>

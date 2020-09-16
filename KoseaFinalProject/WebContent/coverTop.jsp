@@ -85,7 +85,7 @@ footer {
 						</a>
 							<div class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="#">Account</a>
+								<a class="dropdown-item" href="/KoseaFinalProject/account/AccountModify.jsp">Account</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item"
 									href="/KoseaFinalProject/WebmarkServlet?command=logout">Logout</a>
@@ -96,6 +96,9 @@ footer {
 
 						<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/main/sampleaccount.jsp">
 						<i class="fas fa-user-check"></i> &nbsp; Sign-in &nbsp; </a></li>
+
+						<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/login/Login.jsp">
+						<i class="fas fa-user-check"></i> &nbsp; Sign-in 2 &nbsp; </a></li>
 						
 						<li class="nav-item"><a class="nav-link" href="#">
 						<i class="fas fa-user-edit"></i> &nbsp; Sign-up &nbsp; </a></li>
