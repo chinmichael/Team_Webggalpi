@@ -107,7 +107,7 @@ footer {
 					</c:when>
 					<c:otherwise>
 
-						<li class="nav-item"><a class="nav-link" href="#"><i
+						<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/login/Login.jsp"><i
 								class="fas fa-user-check"></i> &nbsp; Sign-in &nbsp; </a></li>
 
 					</c:otherwise>

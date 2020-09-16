@@ -35,11 +35,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	  
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("member/login.jsp");
-	    dispatcher.forward(request, response);
 	
 	}
 
@@ -48,14 +43,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-	  String url="member/login.jsp";
-	  
-      String user_id = request.getParameter("user_id");
-      String user_pw = request.getParameter("user_pw");
+      String user_id = request.getParameter("userid");
+      String user_pw = request.getParameter("userpw");
 	 
       LoginDAO mDao = LoginDAO.getInstance();
-      int result =mDao.userCheck(user_id, user_pw);
+      int result = mDao.userCheck(user_id, user_pw);
+      
+      String url = "";
       
       if(result==1) {
     	  AccountVO mVo = mDao.getMember(user_id);
@@ -63,16 +57,19 @@ public class LoginServlet extends HttpServlet {
     	  List<CategoryVO> list = dao.getCategoryList(user_id);
     	  
     	  HttpSession session = request.getSession();
-    	  session.setAttribute("Account", mVo);
+    	  session.setAttribute("account", mVo);
     	  session.setAttribute("categoryList", list);
     	  session.setMaxInactiveInterval(24*60*60);
-    	  url="/main/markList.jsp";
     	  
-      }else if(result==0) {
-    	  request.setAttribute("message", "비밀번호가 맞지 않습니다.");
+    	  url = "/main/markList.jsp";
     	  
-      }else if(result== -1) {
-    	  request.setAttribute("message", "존재하지 않는 회원입니다");
+      }else if(result == 0) {
+    	  request.setAttribute("message", "Please check your password.");
+    	  url = "/login/Login.jsp";
+    	  
+      }else if(result == -1) {
+    	  request.setAttribute("message", "Please check your ID.");
+    	  url = "/login/Login.jsp";
       }
       
       RequestDispatcher dispatcher = request

@@ -94,13 +94,10 @@ footer {
 					</c:when>
 					<c:otherwise>
 
-						<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/main/sampleaccount.jsp">
-						<i class="fas fa-user-check"></i> &nbsp; Sign-in &nbsp; </a></li>
-
 						<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/login/Login.jsp">
-						<i class="fas fa-user-check"></i> &nbsp; Sign-in 2 &nbsp; </a></li>
+						<i class="fas fa-user-check"></i> &nbsp; Sign-in &nbsp; </a></li>
 						
-						<li class="nav-item"><a class="nav-link" href="#">
+						<li class="nav-item"><a class="nav-link" href="/KoseaFinalProject/login/JoinForm.jsp">
 						<i class="fas fa-user-edit"></i> &nbsp; Sign-up &nbsp; </a></li>
 
 					</c:otherwise>

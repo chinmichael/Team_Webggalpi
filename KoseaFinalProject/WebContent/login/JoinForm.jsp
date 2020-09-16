@@ -119,9 +119,8 @@ body {
             <button type="submit" class="btn btn-primary btn-block btn-lg"
             >Sign Up</button>
         </div>
-		<p class="small text-center">난니 고막의순결을뺏지 <br><a href="#">뒤로가기</a>, and <a href="#">돌아가기</a></p>
-    </form>
-	<div class="text-center">Already have an account? <a href="/web-study-02/member/login.jsp">Login here</a></div>
+		<p class="small text-center">Webgalpi<br><a href="/KoseaFinalProject/tempCover.jsp">Return to Home</a>
+	<div class="text-center">Already have an account? <a href="/KoseaFinalProject/login/Login.jsp">Login here</a></div>
 </div>
 </body>
 </html>

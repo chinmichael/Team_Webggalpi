@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix= "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,35 +87,66 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="Account.do" method="post" name="frm">
+    <form action="/KoseaFinalProject/Account.do" method="post" name="frm">
+    <input type = "hidden" name = "user_id" value = "${account.getUserid() }">
 		<h2>Account modify</h2>
 		
 		<hr>
  
         <div class="form-group">
 			<label>Email Address</label>
-        	<input type="email" class="form-control" name="e_mail" required="required">
+        	<input type="email" class="form-control" name="e_mail" required="required"
+        	value = "${account.getEmail() }">
         </div>
         <div class="form-group">
 			<label>Name</label>
-            <input type="text" class="form-control" name="user_name" required="required">
+            <input type="text" class="form-control" name="user_name" required="required"
+            value = "${account.getUsername() }">
         </div>
         <div class="form-group">
 			<label>Nickname</label>
-            <input type="text" class="form-control" name="user_nick" required="required">
+            <input type="text" class="form-control" name="user_nick" required="required"
+            value = "${account.getUsernick() }">
         </div>
 		<div class="form-group">
 			<label>Password</label>
-            <input type="password" class="form-control" name="user_pw" required="required">
+            <input type="password" class="form-control" name="user_pw" id="user_pw" required="required"
+            value = "${account.getUserpw() }">
         </div>
         <div class="form-group">
 			<label>Confirm Password</label>
-            <input type="password" class="form-control" name="confirm_pw" required="required">
+            <input type="password" class="form-control" name="confirm_pw" id="confirm_pw" required="required">
         </div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block btn-lg">change Up</button>
+            <button type="submit" class="btn btn-primary btn-block btn-lg"
+            onclick="return checkPW()">change Up</button>
         </div>
     </form>
 </div>
+
+<h4 style = "text-align : center;"><a href = "/KoseaFinalProject/main/markList.jsp">Return to List</a></h4>
+
+<script type = "text/javascript">
+	function checkPW() {
+		var pw = document.getElementById("user_pw").value;
+		var cfpw = document.getElementById("confirm_pw").value;
+		
+		if(pw != cfpw) {
+			alert("Passwords do not match.");
+			return false;
+		}
+		
+		return true;
+	}
+</script>
+
+<c:if test="${not empty message }">
+	<input type = "hidden" value = "${message }" id = "message">
+	<script type="text/javascript">
+		window.onload = function() {
+			alert($("#message").val());
+		};
+	</script>	
+</c:if>
 </body>
 </html>

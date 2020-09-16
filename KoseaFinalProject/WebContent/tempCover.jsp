@@ -23,7 +23,7 @@
 				<c:when test = "${empty account }">
 					<hr class="my-4">
 					<p>Do you have any Webgalpi ID yet?</p>
-					<a class="btn btn-dark btn-lg" href="#" role="button">Sign Up</a>
+					<a class="btn btn-dark btn-lg" href="/KoseaFinalProject/login/JoinForm.jsp" role="button">Sign Up</a>
 				</c:when>
 				<c:otherwise>
 					<hr class="my-4">

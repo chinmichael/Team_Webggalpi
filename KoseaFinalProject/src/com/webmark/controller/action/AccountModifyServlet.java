@@ -45,12 +45,14 @@ public class AccountModifyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
+		String userid = request.getParameter("user_id");
 		String user_pw = request.getParameter("user_pw");
 		String user_name = request.getParameter("user_name");
 		String user_nick = request.getParameter("user_nick");
 		String e_mail = request.getParameter("e_mail");
 		
 		AccountVO mVo =new AccountVO();
+		mVo.setUserid(userid);
 		mVo.setUserpw(user_pw);
 		mVo.setUsername(user_name);
 		mVo.setUsernick(user_nick);
@@ -59,16 +61,16 @@ public class AccountModifyServlet extends HttpServlet {
 		AccountDAO dao = AccountDAO.getInstance();
 		int result = dao.modifyAccount(mVo);
 		
-		HttpSession session =request.getSession();
-		
 		if(result==1) {
-			session.setAttribute("user_id",mVo.getUserid());
-			request.setAttribute("message", "정보변경 성공.");
-		}else {
-			request.setAttribute("message", "정보변경 실패.");
+			AccountVO vo = dao.changeInfo(mVo.getUserid());
+			HttpSession session = request.getSession();
+			session.setAttribute("account", vo);
 			
+			request.setAttribute("message", "Success to change information.");
+		}else {
+			request.setAttribute("message", "Fail to change information.");
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/account/AccountModify.jsp");
 		dispatcher.forward(request, response);
 		
 //		doGet(request, response);

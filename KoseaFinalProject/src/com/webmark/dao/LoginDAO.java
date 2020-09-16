@@ -20,7 +20,7 @@ public class LoginDAO {
 
 	public int userCheck(String user_id, String user_pw) {
 		int result = -1;
-		String sql = "select user_pw from member where user_id=?";
+		String sql = "select user_pw from accountwm where user_id=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -31,7 +31,7 @@ public class LoginDAO {
 			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				if (rs.getString("user_pw") != null && rs.getString("user_pw").equals("user_pw")) {
+				if (rs.getString("user_pw").equals(user_pw)) {
 					result = 1;
 				} else {
 					result = 0;
@@ -49,7 +49,7 @@ public class LoginDAO {
 
 	public AccountVO getMember(String user_id) {
 		AccountVO mVo = null;
-		String sql = "select * from accountwm where user_id=?";
+		String sql = "select user_id, user_pw, user_name, user_nick, e_mail, user_type, to_char(create_date, 'yyyy/mm/dd') \"create_date\" from accountwm where user_id = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
