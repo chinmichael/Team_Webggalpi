@@ -122,7 +122,7 @@ pageEncoding="UTF-8"%>
     </button>
 
     <div class="modal-body">
-<form action="/KoseaFinalProject/login.do" method="post" name="frm">
+<form action="/KoseaFinalProject/LoginServlet" method="post" name="frm">
    <div class="form-group">
        <input type="text" class="form-control" name="userid" placeholder="Username"
        required="required">

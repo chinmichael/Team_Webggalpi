@@ -1,4 +1,4 @@
-package com.webmark.controller.action;
+package com.webmark.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +18,7 @@ import com.webmark.dto.CategoryVO;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet({ "/LoginServlet", "/login.do" })
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

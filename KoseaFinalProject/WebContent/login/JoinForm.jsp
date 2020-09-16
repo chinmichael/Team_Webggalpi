@@ -86,7 +86,7 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="/KoseaFinalProject/join.do" method="post" name="frm">
+    <form action="/KoseaFinalProject/JoinServlet" method="post" name="frm">
 		<h2>Sign Up</h2>
 		
 		<hr>

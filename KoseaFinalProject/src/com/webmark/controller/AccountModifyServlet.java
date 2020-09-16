@@ -1,4 +1,4 @@
-package com.webmark.controller.action;
+package com.webmark.controller;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import com.webmark.dto.AccountVO;
 /**
  * Servlet implementation class JoinServlet
  */
-@WebServlet("/Account.do")
+@WebServlet("/AccountModifyServlet")
 public class AccountModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -87,7 +87,7 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="/KoseaFinalProject/Account.do" method="post" name="frm">
+    <form action="/KoseaFinalProject/AccountModifyServlet" method="post" name="frm">
     <input type = "hidden" name = "user_id" value = "${account.getUserid() }">
 		<h2>Account modify</h2>
 		

@@ -1,4 +1,4 @@
-package com.webmark.controller.action;
+package com.webmark.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +18,7 @@ import com.webmark.dto.CategoryVO;
 /**
  * Servlet implementation class JoinServlet
  */
-@WebServlet("/join.do")
+@WebServlet("/JoinServlet")
 public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
