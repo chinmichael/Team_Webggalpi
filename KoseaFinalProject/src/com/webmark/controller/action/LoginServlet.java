@@ -43,38 +43,40 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-      String user_id = request.getParameter("userid");
-      String user_pw = request.getParameter("userpw");
-	 
-      LoginDAO mDao = LoginDAO.getInstance();
-      int result = mDao.userCheck(user_id, user_pw);
-      
-      String url = "";
-      
-      if(result==1) {
-    	  AccountVO mVo = mDao.getMember(user_id);
-    	  MainDAO dao = MainDAO.getInstance();
-    	  List<CategoryVO> list = dao.getCategoryList(user_id);
-    	  
-    	  HttpSession session = request.getSession();
-    	  session.setAttribute("account", mVo);
-    	  session.setAttribute("categoryList", list);
-    	  session.setMaxInactiveInterval(24*60*60);
-    	  
-    	  url = "/main/markList.jsp";
-    	  
-      }else if(result == 0) {
-    	  request.setAttribute("message", "Please check your password.");
-    	  url = "/login/Login.jsp";
-    	  
-      }else if(result == -1) {
-    	  request.setAttribute("message", "Please check your ID.");
-    	  url = "/login/Login.jsp";
-      }
-      
-      RequestDispatcher dispatcher = request
-    		  .getRequestDispatcher(url);
-      dispatcher.forward(request, response);
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		String user_id = request.getParameter("userid");
+		String user_pw = request.getParameter("userpw");
+
+		LoginDAO mDao = LoginDAO.getInstance();
+		int result = mDao.userCheck(user_id, user_pw);
+
+		String url = "";
+
+		if (result == 1) {
+			AccountVO mVo = mDao.getMember(user_id);
+			MainDAO dao = MainDAO.getInstance();
+			List<CategoryVO> list = dao.getCategoryList(user_id);
+
+			HttpSession session = request.getSession();
+			session.setAttribute("account", mVo);
+			session.setAttribute("categoryList", list);
+			session.setMaxInactiveInterval(24 * 60 * 60);
+
+			url = "/main/markList.jsp";
+
+		} else if (result == 0) {
+			request.setAttribute("message", "Please check your password.");
+			url = "/login/Login.jsp";
+
+		} else if (result == -1) {
+			request.setAttribute("message", "Please check your ID.");
+			url = "/login/Login.jsp";
+		}
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
 	}
 
 }

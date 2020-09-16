@@ -1,6 +1,7 @@
 package com.webmark.controller.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.webmark.dao.LoginDAO;
+import com.webmark.dao.MainDAO;
 import com.webmark.dto.AccountVO;
+import com.webmark.dto.CategoryVO;
 /**
  * Servlet implementation class JoinServlet
  */
@@ -19,30 +22,15 @@ import com.webmark.dto.AccountVO;
 public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public JoinServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("member/join.jsp");
-		dispatcher.forward(request, response);
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		request.setCharacterEncoding("UTF-8");
 		
 		String user_id = request.getParameter("user_id");
@@ -59,18 +47,29 @@ public class JoinServlet extends HttpServlet {
 		mVo.setEmail(e_mail);
 		
 		LoginDAO mDao = LoginDAO.getInstance();
-		int result=mDao.insertaccountwm(mVo);
+		int result = mDao.insertaccountwm(mVo);
 		
-		HttpSession session =request.getSession();
+		String url = "";
 		
 		if(result==1) {
-			session.setAttribute("user_id",mVo.getUserid());
-			request.setAttribute("message", "회원가입에 성공했습니다.");
+			AccountVO vo = mDao.getMember(user_id);
+			MainDAO dao = MainDAO.getInstance();
+			List<CategoryVO> list = dao.getCategoryList(user_id);
+
+			HttpSession session = request.getSession();
+			session.setAttribute("account", vo);
+			session.setAttribute("categoryList", list);
+			session.setMaxInactiveInterval(24 * 60 * 60);
+			
+			request.setAttribute("message", "Success to join.");
+			
+			url = "/main/markList.jsp";
 		}else {
-			request.setAttribute("message", "회원가입에 실패했습니다.");
+			request.setAttribute("message", "Fail to join.");
+			url = "/login/JoinForm.jsp";
 			
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("member/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 		
 //		doGet(request, response);

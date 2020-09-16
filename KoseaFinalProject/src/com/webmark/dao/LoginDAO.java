@@ -65,6 +65,7 @@ public class LoginDAO {
 				mVo.setUserpw(rs.getString("user_pw"));
 				mVo.setUsernick(rs.getString("user_nick"));
 				mVo.setEmail(rs.getString("e_mail"));
+				mVo.setUsertype(rs.getString("user_type"));
 				mVo.setCreatedate(rs.getString("create_date"));
 
 			}
@@ -91,9 +92,11 @@ public class LoginDAO {
 			pstmt.setString(3, mVo.getUsername());
 			pstmt.setString(4, mVo.getUsernick());
 			pstmt.setString(5, mVo.getEmail());
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			result = 1;
 		} catch (Exception e) {
 			e.printStackTrace();
+			result = -1;
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
