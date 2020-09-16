@@ -92,23 +92,30 @@ body {
 		<hr>
         <div class="form-group">
 			<label>User ID</label>
-        	<input type="text" class="form-control" name="user_id" id="user_id" required="required">
+        	<input type="text" class="form-control" name="user_id" id="user_id" required="required"
+        	value="${join.getUserid()}">
+        	<h6 style = "padding-left:10px; margin-top : 10px; color:red; font-size:10pt;">${messageOverlapID}</h6>
         </div>
         <div class="form-group">
 			<label>Email Address</label>
-        	<input type="email" class="form-control" name="e_mail" id="e_mail" required="required">
+        	<input type="email" class="form-control" name="e_mail" id="e_mail" required="required"
+        	value="${join.getEmail()}">
+        	<h6 style = "padding-left:10px; margin-top : 10px; color:red; font-size:10pt;">${messageOverlapEmail}</h6>
         </div>
         <div class="form-group">
 			<label>Name</label>
-            <input type="text" class="form-control" name="user_name" id="user_name" required="required">
+            <input type="text" class="form-control" name="user_name" id="user_name" required="required"
+            value="${join.getUsername()}">
         </div>
         <div class="form-group">
 			<label>Nickname</label>
-            <input type="text" class="form-control" name="user_nick" id="user_nick" required="required">
+            <input type="text" class="form-control" name="user_nick" id="user_nick" required="required"
+            value="${join.getUsernick()}">
         </div>
 		<div class="form-group">
 			<label>Password</label>
-            <input type="password" class="form-control" name="user_pw" id="user_pw" required="required">
+            <input type="password" class="form-control" name="user_pw" id="user_pw" required="required"
+            value="${join.getUserpw()}">
         </div>
         <div class="form-group">
 			<label>Confirm Password</label>

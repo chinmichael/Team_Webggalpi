@@ -78,6 +78,70 @@ public class LoginDAO {
 		}
 		return mVo;
 	}
+	
+	public int joinIDcheck(String userid) {
+		
+		int result = -1;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select user_id from accountwm where user_id = ?";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			result = 1;
+			
+			if(rs.next()) {
+				result = 0;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = -1;
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+
+		return result;
+	}
+
+	public int joinMailcheck(String email) {
+
+		int result = -1;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select e_mail from accountwm where e_mail = ?";
+
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			result = 1;
+			
+			if(rs.next()) {
+				result = 0;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = -1;
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+
+		return result;
+	}
 
 	public int insertaccountwm(AccountVO mVo) {
 		int result = -1;

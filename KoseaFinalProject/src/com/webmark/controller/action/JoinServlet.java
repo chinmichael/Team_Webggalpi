@@ -46,29 +46,53 @@ public class JoinServlet extends HttpServlet {
 		mVo.setUsernick(user_nick);
 		mVo.setEmail(e_mail);
 		
-		LoginDAO mDao = LoginDAO.getInstance();
-		int result = mDao.insertaccountwm(mVo);
-		
 		String url = "";
 		
-		if(result==1) {
-			AccountVO vo = mDao.getMember(user_id);
-			MainDAO dao = MainDAO.getInstance();
-			List<CategoryVO> list = dao.getCategoryList(user_id);
-
-			HttpSession session = request.getSession();
-			session.setAttribute("account", vo);
-			session.setAttribute("categoryList", list);
-			session.setMaxInactiveInterval(24 * 60 * 60);
+		LoginDAO mDao = LoginDAO.getInstance();
+		
+		int idResult = mDao.joinIDcheck(user_id);
+		int mailResult = mDao.joinMailcheck(e_mail);
+		
+		if(idResult == 0 || mailResult == 0) {
 			
-			request.setAttribute("message", "Success to join.");
+			if(idResult == 0) {
+				request.setAttribute("messageOverlapID", "This ID is not available.");
+			}
 			
-			url = "/main/markList.jsp";
-		}else {
-			request.setAttribute("message", "Fail to join.");
+			if(mailResult == 0) {
+				request.setAttribute("messageOverlapEmail", "This Email is not available.");
+			}
+			
+			request.setAttribute("join", mVo);
+			
 			url = "/login/JoinForm.jsp";
 			
+		} else {
+			
+			int result = mDao.insertaccountwm(mVo);
+			
+			if(result==1) {
+				AccountVO vo = mDao.getMember(user_id);
+				MainDAO dao = MainDAO.getInstance();
+				List<CategoryVO> list = dao.getCategoryList(user_id);
+
+				HttpSession session = request.getSession();
+				session.setAttribute("account", vo);
+				session.setAttribute("categoryList", list);
+				session.setMaxInactiveInterval(24 * 60 * 60);
+				
+				request.setAttribute("message", "Success to join.");
+				
+				url = "/main/markList.jsp";
+			}else {
+				request.setAttribute("message", "Fail to join.");
+				url = "/login/JoinForm.jsp";
+				
+			}
+			
 		}
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 		

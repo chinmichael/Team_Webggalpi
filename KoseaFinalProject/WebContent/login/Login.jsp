@@ -112,7 +112,7 @@ pageEncoding="UTF-8"%>
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="avatar">
-                        <img src="/examples/images/avatar.png" alt="Avatar">
+                        <img src="/KoseaFinalProject/resource/image/avatar.png" alt="Avatar">
                     </div>				
 
 
