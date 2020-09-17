@@ -19,6 +19,37 @@ public class AccountDAO {
 	public static AccountDAO getInstance() {
 		return instance;
 	}
+	
+	public int checkMail(String email, String userid) {
+		
+		int result = -1;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select user_id from accountwm where e_mail = ?";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(!userid.equals(rs.getString("user_id"))) {
+					result = 0;
+				}
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		
+		return result;
+	}
 
 	public int modifyAccount(AccountVO mVo) {
 		int result = -1;

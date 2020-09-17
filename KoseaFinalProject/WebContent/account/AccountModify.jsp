@@ -97,6 +97,7 @@ body {
 			<label>Email Address</label>
         	<input type="email" class="form-control" name="e_mail" required="required"
         	value = "${account.getEmail() }">
+        	<h6 style = "padding-left:10px; margin-top : 10px; color:red; font-size:10pt;">${messageMail}</h6>
         </div>
         <div class="form-group">
 			<label>Name</label>

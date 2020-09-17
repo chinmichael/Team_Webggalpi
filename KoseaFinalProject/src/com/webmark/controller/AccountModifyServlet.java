@@ -51,25 +51,35 @@ public class AccountModifyServlet extends HttpServlet {
 		String user_nick = request.getParameter("user_nick");
 		String e_mail = request.getParameter("e_mail");
 		
-		AccountVO mVo =new AccountVO();
-		mVo.setUserid(userid);
-		mVo.setUserpw(user_pw);
-		mVo.setUsername(user_name);
-		mVo.setUsernick(user_nick);
-		mVo.setEmail(e_mail);
-		
 		AccountDAO dao = AccountDAO.getInstance();
-		int result = dao.modifyAccount(mVo);
 		
-		if(result==1) {
-			AccountVO vo = dao.changeInfo(mVo.getUserid());
-			HttpSession session = request.getSession();
-			session.setAttribute("account", vo);
-			
-			request.setAttribute("message", "Success to change information.");
-		}else {
+		int mailResult = dao.checkMail(e_mail, userid);
+		
+		if(mailResult == 0) {
+			request.setAttribute("messageMail", "This Email is not available.");
 			request.setAttribute("message", "Fail to change information.");
+		} else {
+			AccountVO mVo =new AccountVO();
+			mVo.setUserid(userid);
+			mVo.setUserpw(user_pw);
+			mVo.setUsername(user_name);
+			mVo.setUsernick(user_nick);
+			mVo.setEmail(e_mail);
+			
+			int result = dao.modifyAccount(mVo);
+			
+			if(result==1) {
+				AccountVO vo = dao.changeInfo(mVo.getUserid());
+				HttpSession session = request.getSession();
+				session.setAttribute("account", vo);
+				session.setMaxInactiveInterval(24 * 60 * 60);
+				
+				request.setAttribute("message", "Success to change information.");
+			}else {
+				request.setAttribute("message", "Fail to change information.");
+			}
 		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/account/AccountModify.jsp");
 		dispatcher.forward(request, response);
 		
