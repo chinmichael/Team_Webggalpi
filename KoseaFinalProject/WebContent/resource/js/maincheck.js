@@ -78,7 +78,7 @@ $(document).ready(function(){
 		if(link == '' || link == null) {
 			alert("Please input url address");
 			$("#urlLink").focus();
-			alert(tag);
+
 			check = false;
 			return;
 			}
@@ -97,34 +97,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#editUrlBtn").click(function(){
 
-		var link = $("#urlLinkE").val();
-		var name = $("#urlNameE").val();
-		var tag = $("#urlTagE").val();
-		var check = true;
-
-		if(link == '' || link == null) {
-			alert("Please input url address");
-			$("#urlLinkE").focus();
-
-			check = false;
-			return;
-			}
-		if(name == '' || name == null) {
-			alert("Please input url name");
-			$("#urlNameE").focus();
-
-			check = false;
-			return;
-			}
-
-
-		if(check) {
-			$("#editUrlFrm").submit();
-		}
-
-	});
 
   $("#noticeWriteBtn").click(function(){
 

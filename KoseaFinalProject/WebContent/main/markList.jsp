@@ -175,8 +175,8 @@
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													style="box-shadow: none;" data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-success"
-													style="box-shadow: none;" id="editUrlBtn">Edit</button>
+												<button type="submit" class="btn btn-success"
+													style="box-shadow: none;" id="editUrlBtn" onclick="return editUrlCheck()">Edit</button>
 											</div>
 										</form>
 									</div>
@@ -188,6 +188,32 @@
 								onclick="window.open('${urlL.url_address }')">
 								<i class="fas fa-map-marker-alt"></i>
 							</button></li>
+
+						<script type="text/javascript">
+							function editUrlCheck() {
+
+								var link = $("#urlLinkE").val();
+								var name = $("#urlNameE").val();
+								var tag = $("#urlTagE").val();
+
+								if (link == '' || link == null) {
+									alert("Please input url address");
+									$("#urlLinkE").focus();
+
+									
+									return false;
+								}
+								if (name == '' || name == null) {
+									alert("Please input url name");
+									$("#urlNameE").focus();
+
+									return false;
+								}
+
+							}
+);
+						</script>
+
 					</c:forEach>
 
 					<%-- add new url --%>
